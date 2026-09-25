@@ -134,7 +134,7 @@ function App() {
   const { players, source } = useRoster(config);
   const counts = useMemo(() => Object.fromEntries(Object.keys(roleNames).map((key) => [key, players.filter((p) => p.role === key).length])), [players]);
   useEffect(() => {
-    fetch('/site-config.json', { cache: 'no-store' }).then((res) => res.ok ? res.json() : {}).then(setConfig).catch(() => {});
+    fetch(`${import.meta.env.BASE_URL}site-config.json`, { cache: 'no-store' }).then((res) => res.ok ? res.json() : {}).then(setConfig).catch(() => {});
   }, []);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
