@@ -1,0 +1,66 @@
+name: Critical Error — odśwież i opublikuj
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      refresh_data:
+        description: 'Odświeżyć teraz wyniki M+?'
+        type: boolean
+        default: true
+  schedule:
+    - cron: '17 4 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: critical-error-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      DISCORD_APPLICATION_WEBHOOK: ${{ secrets.DISCORD_APPLICATION_WEBHOOK }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Odśwież całą gildię w Raider.IO
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_data)
+        run: npm run sync:rio
+      - name: Zapisz nowe dane w repozytorium
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.refresh_data)
+        run: |
+          git config user.name "critical-error-data-bot"
+          git config user.email "critical-error-data-bot@users.noreply.github.com"
+          git add src/data/mplus.js
+          if ! git diff --cached --quiet; then
+            git commit -m "Update Raider.IO guild Mythic+ snapshot"
+            git push origin HEAD:master
+          fi
+      - name: Zbuduj stronę i Workera
+        run: npm run build
+      - name: Konfiguracja Cloudflare jest jeszcze potrzebna
+        if: env.CLOUDFLARE_ACCOUNT_ID == '' || env.CLOUDFLARE_API_TOKEN == '' || env.DISCORD_APPLICATION_WEBHOOK == ''
+        run: echo 'Dodaj 3 sekrety opisane w README, potem uruchom ponownie workflow w Actions.'
+      - name: Opublikuj Cloudflare Worker
+        if: env.CLOUDFLARE_ACCOUNT_ID != '' && env.CLOUDFLARE_API_TOKEN != '' && env.DISCORD_APPLICATION_WEBHOOK != ''
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4'
+          command: deploy
+          secrets: |
+            DISCORD_APPLICATION_WEBHOOK

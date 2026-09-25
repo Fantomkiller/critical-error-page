@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "critical-error-page",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-09-25",
+  "workers_dev": true,
+  "observability": { "enabled": true }
+}

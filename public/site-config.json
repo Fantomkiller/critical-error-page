@@ -1,4 +1,4 @@
 {
-  "googleFormUrl": "",
-  "rosterApiUrl": ""
+  "rosterApiUrl": "",
+  "applicationEndpoint": "/api/apply"
 }
