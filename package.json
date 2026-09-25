@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build && node scripts/build-worker.mjs",
-    "preview": "vite preview --host 0.0.0.0",
-    "sync:rio": "node scripts/sync-rio.mjs"
+    "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
     "react": "19.1.1",

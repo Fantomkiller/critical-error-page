@@ -1,5 +1,6 @@
 import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 import { join, relative, sep } from 'node:path';
+import { rosterSnapshot } from '../src/data/roster.js';
 
 const output = join(process.cwd(), 'dist');
 const files = {};
@@ -19,5 +20,5 @@ async function collect(directory) {
 await collect(output);
 const worker = await readFile(join(process.cwd(), 'server/worker.js'), 'utf8');
 await mkdir(join(output, 'server'), { recursive: true });
-await writeFile(join(output, 'server/index.js'), `const STATIC_ASSETS = ${JSON.stringify(files)};\n${worker}`);
+await writeFile(join(output, 'server/index.js'), `const BUILT_ROSTER = ${JSON.stringify(rosterSnapshot)};\nconst STATIC_ASSETS = ${JSON.stringify(files)};\n${worker}`);
 console.log(`Worker ready with ${Object.keys(files).length} static assets.`);

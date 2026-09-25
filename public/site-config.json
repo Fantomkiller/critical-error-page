@@ -1,4 +1,4 @@
 {
-  "rosterApiUrl": "",
+  "rosterApiUrl": "/api/roster",
   "applicationEndpoint": "/api/apply"
 }

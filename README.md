@@ -1,41 +1,36 @@
-# Critical Error — strona gildii
+# Critical Error
 
-React 19 + Vite dla gildii World of Warcraft **Critical Error** (EU Burning Legion). Sekcje: gildia, załoga, rekrutacja, Mythic+, raid i kontakt. Formularz na stronie dostarcza zgłoszenia na wskazany kanał Discord przez niewielki Cloudflare Worker. Projekt nie wymaga utrzymywania własnego serwera ani panelu admina.
+Strona gildii World of Warcraft Critical Error (EU Burning Legion). React 19 i Vite budują frontend, a Cloudflare Worker obsługuje skład oraz zgłoszenia rekrutacyjne.
 
-## Rozwój
+## Lokalnie
 
 ```bash
 npm ci
 npm run dev
+```
+
+Vite udostępnia także lokalne `/api/roster`, `/api/mplus` i `/api/apply`. Roster Main bez klucza korzysta z zapisanej listy, a ranking M+ pobiera pełną listę członków gildii z Raider.IO. Formularz bez webhooka przygotowuje treść do ręcznego przekazania na Discordzie. Aby korzystać z API WoWAudit dla rosteru Main w lokalnym podglądzie, uruchom Vite z `WOWAUDIT_API_KEY` w środowisku. Nie zapisuj klucza w `public/` ani w repozytorium.
+
+Sprawdzenie zmian:
+
+```bash
 npm run build
 ```
 
-`npm run dev` udostępnia frontend do prac wizualnych. Żeby testować endpoint `/api/apply` lokalnie, użyj zgodnego runtime Cloudflare Workers oraz lokalnego sekretu; sam Vite nie obsługuje tego endpointu. Build Vite jest pakowany przez `scripts/build-worker.mjs` do `dist/server/index.js`. Zależności są przypięte; zachowaj `package-lock.json`.
+## Dane składu
 
-## Publikacja po zmianie w GitHubie i odświeżanie M+
+Przy pierwszym wejściu po wygaśnięciu pięciominutowej pamięci podręcznej Worker pobiera listę Main z prywatnego API WoWAudit, a ilvl i wynik M+ każdej postaci z Raider.IO. Osobny ranking M+ bierze listę członków całej gildii z publicznego API Raider.IO, niezależnie od drużyny Main i arkusza WoWAudit. Sprawdza tylko postacie na bieżącym maksymalnym poziomie 90, następnie pobiera ich wyniki sezonu w partiach po 40, sortuje je i pokazuje Top 10 dopiero po zebraniu całej listy. Postacie bez punktów w bieżącym sezonie nie trafiają do tabeli. Lista i wyniki są trzymane w pamięci podręcznej przez 15 minut. Nie ma crona ani zapisywania wyników M+ do GitHuba. Jeśli Raider.IO nie ma wyniku danej postaci, strona pokazuje brak wartości. Progress raidowy jest pobierany bezpośrednio z Raider.IO w przeglądarce.
 
-Workflow `.github/workflows/deploy.yml` na gałęzi `master` obsługuje trzy tryby: po każdym pushu buduje i publikuje Workera, przycisk **Actions → Critical Error — odśwież i opublikuj → Run workflow** robi to ręcznie (opcjonalnie odświeżając M+), a codzienny harmonogram `04:17 UTC` pobiera członków całej gildii oraz bieżące wyniki M+ każdego z nich z oficjalnego Raider.IO API. Aktualizacja zapisuje `src/data/mplus.js` w GitHubie, a ta sama akcja publikuje stronę. Jeśli API nie odpowie dla przynajmniej 90% postaci, zadanie zatrzyma się i zachowa poprzednią migawkę. Rate limit 429 jest respektowany.
+WoWAudit wymaga klucza API zespołu. Administrator zespołu powinien zalogować się na [WoWAudit API](https://wowaudit.com/api), wybrać właściwy zespół i skopiować klucz. Dodaj go w repozytorium GitHub jako sekret Actions o nazwie `WOWAUDIT_API_KEY`. Workflow przekaże go do Cloudflare Workera podczas wdrożenia. Bez niego Worker używa zapisanej listy Main z `src/data/roster.js`, więc zmiany członkostwa nie są automatyczne. Statystyki tych postaci nadal pobiera na żądanie. Sekret pozostaje po stronie Workera i nie trafia do publicznego JSON-a ani kodu strony. Po zmianie klucza uruchom wdrożenie Workera ponownie i poczekaj do pięciu minut na nowy odczyt.
 
-**Wymagane jednorazowo w Twoim prywatnym repo:** w `Settings → Secrets and variables → Actions` dodaj `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` (token z prawem edycji Workers) i `DISCORD_APPLICATION_WEBHOOK`. Nigdy nie wpisuj tych danych do kodu. Jeśli harmonogram nie może zapisać pliku, sprawdź `Settings → Actions → General → Workflow permissions` i uprawnienie zapisu do zawartości repo. Następnie uruchom **Run workflow**. Docelowy Worker zostanie udostępniony pod adresem Cloudflare pokazanym w logu wdrożenia; obecny link Sites nie jest automatycznie powiązany z GitHub Actions. Bez sekretów workflow buduje projekt i informuje o brakującej konfiguracji, lecz nie publikuje Workera. Możesz też połączyć własną domenę po pierwszym wdrożeniu Cloudflare.
+## Rekrutacja
 
-Istniejący workflow `.github/workflows/pages.yml` publikuje także statyczną stronę GitHub Pages po pushu. Główny workflow publikuje ją bezpośrednio po codziennym odświeżeniu oraz po ręcznym uruchomieniu, ponieważ commit wykonany przez `GITHUB_TOKEN` nie uruchamia kolejnego workflow na `push`. Buduje ją z prefiksem `/critical-error-page/`; formularz wysyła zgłoszenia do Workera obecnej publicznej strony Sites, z ograniczonym CORS dla `https://fantomkiller.github.io`. To pozwala korzystać z działającej rekrutacji na Pages jeszcze przed konfiguracją Cloudflare. GitHub Pages i Sites to dwa osobne adresy: automatyczna aktualizacja M+ z harmonogramu pojawi się na Pages, a na Sites dopiero po ręcznym wdrożeniu tej wersji lub migracji na Cloudflare.
+Formularz wymaga pełnej, unikalnej nazwy użytkownika Discord (np. `gracz.123`), godzin krótkiej rozmowy, oczekiwań wobec gildii i opisu realnej dostępności. Po udanej wysyłce strona kieruje kandydata na serwer Discord. Worker wysyła zgłoszenie na kanał przez `DISCORD_APPLICATION_WEBHOOK`. Webhook nie może wysyłać prywatnej wiadomości do kandydata; do automatycznej wiadomości potrzebny byłby bot, konto kandydata na serwerze i osobna integracja. Sama znajomość nazwy użytkownika też nie gwarantuje kontaktu, jeśli kandydat nie dołączy do serwera i ograniczył zaproszenia do znajomych. Gdy endpoint nie działa, kandydat może skopiować zgłoszenie i wkleić je na Discordzie.
 
-Roster raidowy Main jest odrębny od całej gildii. Do jego automatycznego odświeżania potrzebny jest klucz API Twojego zespołu WoWAudit oraz dostosowanie adaptera do odpowiedzi `/v1/characters`; obecnie wyświetla datowaną migawkę i link do źródła. Sekret WoWAudit należy podłączyć po stronie Workera, nigdy w kodzie przeglądarki.
+## Wdrożenie
 
-## Treść i dane
+`.github/workflows/deploy.yml` buduje i publikuje Workera po pushu do `master` lub ręcznym uruchomieniu. W `Settings → Secrets and variables → Actions → Repository secrets` ustaw `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` i `WOWAUDIT_API_KEY`. Jeśli zgłoszenia mają automatycznie trafiać na kanał Discord, dodaj także `DISCORD_APPLICATION_WEBHOOK`. Bez webhooka roster działa, a formularz przygotowuje wiadomość do ręcznego przekazania. Wartości sekretów pozostają ukryte. Adres opublikowanego Workera będzie widoczny w logu wdrożenia.
 
-- Progress raidowy jest odczytywany w przeglądarce z publicznego Raider.IO API dla bieżącego tieru. Gdy API jest niedostępne, strona prowadzi do źródła.
-- Skład Main startuje z migawki publicznego rosteru WoWAudit z 25.09.2026 (39 głównych postaci, bez dwóch altów) w `src/data/roster.js`. Oznaczenie daty pozostaje widoczne, dopóki nie działa automatyczne odświeżanie.
-- Po uzyskaniu dostępu do wykupionego WoWAudit API można podłączyć bezpieczny adapter po stronie Workera i ustawić adres w `public/site-config.json` jako `rosterApiUrl`. Odpowiedź musi zwracać tablicę lub `{ "players": [...] }` z polami `name`, `className`, `role` (`tank`, `heal`, `melee`, `ranged`), `realm`, `path` (`/character/...`). **Nie** wpisuj klucza API do plików React, konfiguracji publicznej ani repozytorium.
-- Raider.IO `members` obejmuje całą gildię, w tym osoby grające M+ poza rosterem raidowym. Liczba członków i przynależność postaci widocznych w czołówce są sprawdzane w przeglądarce przez oficjalne API Raider.IO. Wyniki w `src/data/mplus.js` są datowaną migawką pobieraną przez cron z wyników pojedynczych postaci całej gildii; na aktywnym wdrożeniu Cloudflare odświeżają się codziennie po konfiguracji trzech sekretów. Bez nich są datowaną migawką, a karty prowadzą do bieżących profili. Dawny wynik 8/9 Heroic nie jest pokazywany jako bieżący progress nowego tieru.
-- Teksty o gildii i godziny raidów pochodzą od członka gildii. Grupy M+ tworzą się na czacie lub w grze, także na wysokie klucze. Informacje i zapisy na raidy są na Discordzie. Nie kopiujemy turnieju, panelu admina ani kalendarza z innej gildii.
+`.github/workflows/pages.yml` publikuje statyczną wersję GitHub Pages. Aby korzystała z tego samego Workera, ustaw w `Settings → Secrets and variables → Actions → Variables` zmienną repozytorium `GUILD_WORKER_URL` na sam adres Workera z logu, na przykład `https://twoj-worker.workers.dev/`. Skrypt dopisuje `/api/roster` i `/api/apply` podczas budowania. Po ustawieniu zmiennej uruchom ponownie workflow **Deploy GitHub Pages**. Bez niej Pages pokazuje zapisany skład, a formularz przygotowuje wiadomość do ręcznego wysłania. Nie używa starego adresu Sites.
 
-## Zgłoszenia na Discord
-
-Formularz pozwala wybrać kilka ról, główną klasę i specjalizację, postać, realm, Discord, doświadczenie, opcjonalne linki do Warcraft Logs i Raider.IO, dostępność w środy, czwartki i na dodatkowy poniedziałek oraz opis. Frontend wysyła dane do `/api/apply` na tej samej domenie. Worker waliduje pola, ogranicza wielkość i tempo zgłoszeń, wyłącza oznaczanie użytkowników i wysyła embed do webhooka. Sukces jest pokazywany tylko po potwierdzeniu Discorda. W razie błędu użytkownik może skopiować treść i przekazać ją ręcznie na Discordzie. WoWAudit pozostaje alternatywną drogą zgłoszenia przez Battle.net.
-
-Webhook jest sekretem środowiskowym Sites o nazwie `DISCORD_APPLICATION_WEBHOOK`. Nie jest zapisany w kodzie ani w GitHubie. W innym hostingu ustaw tę samą nazwę jako sekret Workera. Publiczny formularz nie zapisuje danych do bazy — ich odbiornikiem jest kanał Discord wskazany przez webhook.
-
-## Grafika
-
-`public/assets/hero.webp` jest oryginalną ilustracją wygenerowaną dla tej strony. Strona jest projektem fanowskim i nie używa oficjalnych grafik Blizzard.
+`public/assets/hero.webp` jest oryginalną ilustracją przygotowaną dla strony. Strona jest projektem fanowskim; World of Warcraft i związane z nim nazwy należą do Blizzard Entertainment.
