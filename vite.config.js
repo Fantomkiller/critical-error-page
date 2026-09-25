@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/',
+  base: '/critical-error-page/',
   build: { outDir: 'dist', emptyOutDir: true },
 });
