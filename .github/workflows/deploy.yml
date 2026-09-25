@@ -14,6 +14,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: critical-error-production
@@ -64,3 +66,28 @@ jobs:
           command: deploy
           secrets: |
             DISCORD_APPLICATION_WEBHOOK
+      - name: Zbuduj stronę dla GitHub Pages
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: npx vite build && node scripts/configure-pages.mjs
+        env:
+          GITHUB_PAGES: 'true'
+      - name: Przygotuj GitHub Pages
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        uses: actions/configure-pages@v5
+      - name: Przekaż pliki GitHub Pages
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy_pages:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: publish
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Opublikuj GitHub Pages po odświeżeniu danych
+        id: deployment
+        uses: actions/deploy-pages@v4
