@@ -1,6 +1,6 @@
 // Publiczny roster WoWAudit, drużyna Main, odczyt 2026-09-25.
 // Alty Amtalen i Tobilanee nie są częścią 39 głównych postaci.
-window.CRITICAL_ERROR_ROSTER = [
+export const rosterSnapshot = [
   ['Dkadam','Death Knight','tank','Defias Brotherhood','/character/eu/defias-brotherhood/dkadam'],
   ['Erum','Warrior','tank','Burning Legion','/character/eu/burning-legion/erum'],
   ['Cheezyr','Evoker','heal','Burning Legion','/character/eu/burning-legion/cheezyr'],
