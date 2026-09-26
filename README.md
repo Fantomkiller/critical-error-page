@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-Vite udostępnia także lokalne `/api/roster`, `/api/mplus` i `/api/apply`. Roster Main bez klucza korzysta z zapisanej listy, a ranking M+ pobiera pełną listę członków gildii z Raider.IO. Formularz bez webhooka przygotowuje treść do ręcznego przekazania na Discordzie. Aby korzystać z API WoWAudit dla rosteru Main w lokalnym podglądzie, uruchom Vite z `WOWAUDIT_API_KEY` w środowisku. Nie zapisuj klucza w `public/` ani w repozytorium.
+Vite udostępnia także lokalne `/api/roster`, `/api/mplus` i `/api/apply`. Roster Main bez klucza korzysta z zapisanej listy, a ranking M+ pobiera gotową topkę całej gildii z Raider.IO. Formularz bez webhooka przygotowuje treść do ręcznego przekazania na Discordzie. Aby korzystać z API WoWAudit dla rosteru Main w lokalnym podglądzie, uruchom Vite z `WOWAUDIT_API_KEY` w środowisku. Nie zapisuj klucza w `public/` ani w repozytorium.
 
 Sprawdzenie zmian:
 
@@ -19,7 +19,7 @@ npm run build
 
 ## Dane składu
 
-Przy pierwszym wejściu po wygaśnięciu pięciominutowej pamięci podręcznej Worker pobiera listę Main z prywatnego API WoWAudit, a ilvl i wynik M+ każdej postaci z Raider.IO. Osobny ranking M+ bierze listę członków całej gildii z publicznego API Raider.IO, niezależnie od drużyny Main i arkusza WoWAudit. Sprawdza tylko postacie na bieżącym maksymalnym poziomie 90, następnie pobiera ich wyniki sezonu w partiach po 40, sortuje je i pokazuje Top 10 dopiero po zebraniu całej listy. Postacie bez punktów w bieżącym sezonie nie trafiają do tabeli. Lista i wyniki są trzymane w pamięci podręcznej przez 15 minut. Nie ma crona ani zapisywania wyników M+ do GitHuba. Jeśli Raider.IO nie ma wyniku danej postaci, strona pokazuje brak wartości. Progress raidowy jest pobierany bezpośrednio z Raider.IO w przeglądarce.
+Worker pobiera listę Main z prywatnego API WoWAudit, a ilvl i wynik M+ każdej postaci z Raider.IO. Osobny ranking M+ pobiera gotową, posortowaną listę całej gildii z tego samego źródła danych, którego używa strona Raider.IO. Z pierwszej strony bierze Top 10: nick, klasę i rating, bez osobnych zapytań o profile postaci. Dlatego tabela Top 10 nie pokazuje ilvl. Aktualny sezon rozpoznaje po nagłówku przekierowania strony rankingu. Roster odświeża się po 5 minutach, ranking po 15 minutach. Po tym czasie Worker od razu zwraca ostatni wynik i pobiera nowy w tle; przechowuje go na brzegu do 24 godzin. Przy pierwszym pobraniu strona pokazuje skeleton. Nie ma crona ani zapisywania wyników do GitHuba. Progress raidowy jest pobierany bezpośrednio z Raider.IO w przeglądarce.
 
 WoWAudit wymaga klucza API zespołu. Administrator zespołu powinien zalogować się na [WoWAudit API](https://wowaudit.com/api), wybrać właściwy zespół i skopiować klucz. Dodaj go w repozytorium GitHub jako sekret Actions o nazwie `WOWAUDIT_API_KEY`. Workflow przekaże go do Cloudflare Workera podczas wdrożenia. Bez niego Worker używa zapisanej listy Main z `src/data/roster.js`, więc zmiany członkostwa nie są automatyczne. Statystyki tych postaci nadal pobiera na żądanie. Sekret pozostaje po stronie Workera i nie trafia do publicznego JSON-a ani kodu strony. Po zmianie klucza uruchom wdrożenie Workera ponownie i poczekaj do pięciu minut na nowy odczyt.
 

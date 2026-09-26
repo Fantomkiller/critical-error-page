@@ -6,7 +6,7 @@ const rosterCache = {};
 const mplusCache = {};
 const ROSTER_TTL = 5 * 60 * 1000;
 const MPLUS_TTL = 15 * 60 * 1000;
-const CURRENT_MPLUS_LEVEL = 90;
+const STALE_TTL = 24 * 60 * 60 * 1000;
 
 function json(data, status = 200, origin = '') {
   return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...(origin === 'https://fantomkiller.github.io' ? { 'Access-Control-Allow-Origin': origin, Vary: 'Origin' } : {}) } });
@@ -63,101 +63,70 @@ async function loadRoster(env) {
   return { players: enriched, updatedAt: new Date().toISOString() };
 }
 
-async function getRoster(request, env) {
+async function cachedApiResponse(request, context, cache, ttl, cachePath, useEdgeCache, load, unavailable) {
   const origin = request.headers.get('Origin') || '';
-  const cache = env.ROSTER_CACHE || rosterCache;
-  if (cache.payload && cache.until > Date.now()) return json(cache.payload, 200, origin);
-  const edgeCache = typeof caches !== 'undefined' && caches.default && !env.ROSTER_CACHE ? caches.default : null;
-  const cacheRequest = new Request(new URL('/__roster_cache', request.url));
-  if (edgeCache) {
+  const edgeCache = typeof caches !== 'undefined' && caches.default && useEdgeCache ? caches.default : null;
+  const cacheRequest = new Request(new URL(cachePath, request.url));
+  if (!cache.payload && edgeCache) {
     const saved = await edgeCache.match(cacheRequest);
-    if (saved) {
-      cache.payload = await saved.json();
-      cache.until = Date.now() + ROSTER_TTL;
-      return json(cache.payload, 200, origin);
-    }
+    if (saved) cache.payload = await saved.json();
   }
-  if (!cache.pending) cache.pending = loadRoster(env).then(async (payload) => {
+  const updatedAt = Date.parse(cache.payload?.updatedAt || '');
+  if (cache.payload && Date.now() - updatedAt < ttl) return json(cache.payload, 200, origin);
+  if (cache.payload && cache.retryAfter > Date.now()) return json(cache.payload, 200, origin);
+
+  if (!cache.pending) cache.pending = load().then(async (payload) => {
     cache.payload = payload;
-    cache.until = Date.now() + ROSTER_TTL;
-    if (edgeCache) await edgeCache.put(cacheRequest, new Response(JSON.stringify(payload), { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' } }));
+    cache.retryAfter = 0;
+    if (edgeCache) try {
+      await edgeCache.put(cacheRequest, new Response(JSON.stringify(payload), { headers: { 'Content-Type': 'application/json', 'Cache-Control': `public, max-age=${STALE_TTL / 1000}` } }));
+    } catch (error) { console.warn(`Cache write failed: ${String(error)}`); }
     return payload;
-  }).finally(() => { cache.pending = null; });
+  }).catch((error) => { cache.retryAfter = Date.now() + 60 * 1000; throw error; })
+    .finally(() => { cache.pending = null; });
+
+  if (cache.payload && Date.now() - updatedAt < STALE_TTL) {
+    const pending = cache.pending.catch((error) => console.warn(`Background refresh failed: ${String(error)}`));
+    if (context?.waitUntil) context.waitUntil(pending);
+    return json(cache.payload, 200, origin);
+  }
   try { return json(await cache.pending, 200, origin); }
-  catch (error) { console.warn(`Roster refresh failed: ${String(error)}`); return json({ error: 'Skład jest chwilowo niedostępny.' }, 503, origin); }
+  catch (error) {
+    console.warn(`Refresh failed: ${String(error)}`);
+    return cache.payload ? json(cache.payload, 200, origin) : json({ error: unavailable }, 503, origin);
+  }
 }
 
-async function getMplus(request, env) {
-  const origin = request.headers.get('Origin') || '';
-  const cache = env.MPLUS_CACHE || mplusCache;
-  const rawPage = new URL(request.url).searchParams.get('page') || '0';
-  if (!/^(0|[1-9]\d{0,2})$/.test(rawPage)) return json({ error: 'Nieprawidłowa strona rankingu.' }, 400, origin);
-  const page = Number(rawPage);
-  if (!cache.characters || cache.rosterUntil <= Date.now()) {
-    if (!cache.rosterPending) cache.rosterPending = (async () => {
-    const guildUrl = new URL('https://raider.io/api/v1/guilds/profile');
-    guildUrl.search = new URLSearchParams({ region: 'eu', realm: 'burning-legion', name: 'Critical Error', fields: 'members' });
-    const response = await fetch(guildUrl, { signal: AbortSignal.timeout(10000) });
-    if (!response.ok) throw new Error(`Raider.IO guild HTTP ${response.status}`);
-    const guild = await response.json();
-    if (!Array.isArray(guild.members)) throw new Error('Raider.IO returned an invalid guild roster');
-    let players = guild.members.filter((member) => Number(member.character?.level) === CURRENT_MPLUS_LEVEL).map((member) => ({
-      name: member.character?.name, realm: member.character?.realm, className: member.character?.class,
-    })).filter((character) => typeof character.name === 'string' && typeof character.realm === 'string' && typeof character.className === 'string');
-    const seen = new Set();
-    players = players.filter((player) => {
-      const key = `${player.name.toLowerCase()}@${player.realm.toLowerCase()}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-    if (!players.length) throw new Error('Raider.IO returned no max-level guild members');
-    return players;
-    })().then((players) => {
-      cache.characters = players;
-      cache.scope = 'guild';
-      cache.pages = {};
-      cache.rosterUntil = Date.now() + MPLUS_TTL;
-    }).finally(() => { cache.rosterPending = null; });
-    try { await cache.rosterPending; }
-    catch (error) { console.warn(`M+ roster refresh failed: ${String(error)}`); return json({ error: 'Ranking M+ jest chwilowo niedostępny.' }, 503, origin); }
-  }
-  if (page * 40 >= cache.characters.length && page > 0) return json({ error: 'Nieprawidłowa strona rankingu.' }, 400, origin);
-  const saved = cache.pages[page];
-  if (saved?.payload) return json(saved.payload, 200, origin);
-  if (!saved?.pending) {
-    const pageCache = (cache.pages[page] = {});
-    pageCache.pending = (async () => {
-    const players = cache.characters.slice(page * 40, (page + 1) * 40);
-    const enriched = new Array(players.length);
-    let cursor = 0;
-    async function addStats() {
-      while (cursor < players.length) {
-        const index = cursor++;
-        const player = players[index];
-        const profile = new URL('https://raider.io/api/v1/characters/profile');
-        profile.search = new URLSearchParams({ region: 'eu', realm: player.realm, name: player.name, fields: 'gear,mythic_plus_scores_by_season:current' });
-        let itemLevel = null;
-        let score = null;
-        let profileUrl = `https://raider.io/characters/eu/${encodeURIComponent(player.realm.toLowerCase().replace(/\s+/g, '-'))}/${encodeURIComponent(player.name)}`;
-        const response = await fetch(profile, { signal: AbortSignal.timeout(6500) });
-        if (response.ok) {
-          const data = await response.json();
-          const gear = Number(data.gear?.item_level_equipped);
-          const rating = Number(data.mythic_plus_scores_by_season?.[0]?.scores?.all);
-          if (Number.isFinite(gear) && gear > 0) itemLevel = Math.round(gear);
-          if (Number.isFinite(rating) && rating >= 0 && data.mythic_plus_scores_by_season?.length) score = Math.round(rating);
-          if (typeof data.profile_url === 'string' && /^https:\/\/raider\.io\/characters\//.test(data.profile_url)) profileUrl = data.profile_url;
-        } else if (response.status !== 404) throw new Error(`Raider.IO HTTP ${response.status}`);
-        enriched[index] = { name: player.name, realm: player.realm, className: player.className, itemLevel, score, profileUrl };
-      }
-    }
-    await Promise.all(Array.from({ length: Math.min(6, players.length) }, () => addStats()));
-    return { players: enriched, nextPage: (page + 1) * 40 < cache.characters.length ? page + 1 : null, scope: cache.scope };
-    })().then((payload) => { pageCache.payload = payload; return payload; }).finally(() => { pageCache.pending = null; });
-  }
-  try { return json(await cache.pages[page].pending || cache.pages[page].payload, 200, origin); }
-  catch (error) { console.warn(`M+ refresh failed: ${String(error)}`); return json({ error: 'Ranking M+ jest chwilowo niedostępny.' }, 503, origin); }
+async function getRoster(request, env, context) {
+  return cachedApiResponse(request, context, env.ROSTER_CACHE || rosterCache, ROSTER_TTL, '/__roster_cache', !env.ROSTER_CACHE, () => loadRoster(env), 'Skład jest chwilowo niedostępny.');
+}
+
+async function loadMplus() {
+    const guildPage = await fetch('https://raider.io/guilds/eu/burning-legion/Critical%20Error/mythic-plus-characters', { redirect: 'manual', signal: AbortSignal.timeout(10000) });
+    if (!guildPage.ok && ![301, 302, 307, 308].includes(guildPage.status)) throw new Error(`Raider.IO page HTTP ${guildPage.status}`);
+    const seasonUrl = new URL(guildPage.headers.get('Location') || guildPage.url, guildPage.url);
+    const season = seasonUrl.pathname.match(/\/(season-[^/]+)\/?$/)?.[1];
+    if (!season) throw new Error('Raider.IO did not redirect to the current season');
+
+    const rankingUrl = new URL('https://raider.io/api/mythic-plus/rankings/characters');
+    rankingUrl.search = new URLSearchParams({ region: 'eu', realm: 'burning-legion', guild: 'Critical Error', season, class: 'all', role: 'all', page: '0' });
+    const rankingResponse = await fetch(rankingUrl, { signal: AbortSignal.timeout(10000) });
+    if (!rankingResponse.ok) throw new Error(`Raider.IO ranking HTTP ${rankingResponse.status}`);
+    const ranking = await rankingResponse.json();
+    const rows = ranking.rankings?.rankedCharacters;
+    if (!Array.isArray(rows)) throw new Error('Raider.IO returned an invalid ranking');
+    const leaders = rows.filter((row) => row?.character?.name && row?.character?.realm?.name && row?.character?.class?.name && Number(row.score) > 0).slice(0, 10);
+    if (!leaders.length) throw new Error('Raider.IO returned no ranked guild members');
+
+    const players = leaders.map((row) => ({
+      name: row.character.name, realm: row.character.realm.name,
+      className: row.character.class.name, score: Math.round(Number(row.score) * 10) / 10,
+    }));
+    return { players, scope: 'guild', updatedAt: new Date().toISOString() };
+}
+
+async function getMplus(request, env, context) {
+  return cachedApiResponse(request, context, env.MPLUS_CACHE || mplusCache, MPLUS_TTL, '/__mplus_cache', !env.MPLUS_CACHE, loadMplus, 'Ranking M+ jest chwilowo niedostępny.');
 }
 
 async function apply(request, env) {
@@ -225,15 +194,15 @@ async function apply(request, env) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, context) {
     const url = new URL(request.url);
     if (url.pathname === '/api/roster') {
       if (request.method !== 'GET') return json({ error: 'Metoda niedozwolona.' }, 405);
-      return getRoster(request, env);
+      return getRoster(request, env, context);
     }
     if (url.pathname === '/api/mplus') {
       if (request.method !== 'GET') return json({ error: 'Metoda niedozwolona.' }, 405);
-      return getMplus(request, env);
+      return getMplus(request, env, context);
     }
     if (url.pathname === '/api/apply') {
       if (request.method === 'OPTIONS' && request.headers.get('Origin') === 'https://fantomkiller.github.io') return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': 'https://fantomkiller.github.io', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Max-Age': '86400', Vary: 'Origin' } });

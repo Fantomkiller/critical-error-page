@@ -7,7 +7,6 @@ import './style.css';
 
 const links = {
   discord: 'https://discord.gg/SeJ8mTBdGX',
-  audit: 'https://wowaudit.com/guild/eu/burning-legion/critical-error/teams/main',
   logs: 'https://www.warcraftlogs.com/guild/eu/burning-legion/critical%20error',
   rio: 'https://raider.io/guilds/eu/burning-legion/critical%20error',
 };
@@ -59,8 +58,10 @@ function Hero() {
 
 function useRoster(config) {
   const [players, setPlayers] = useState(rosterSnapshot);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (!config.rosterApiUrl) return;
+    if (!config.ready) return;
+    if (!config.rosterApiUrl) { setLoading(false); return; }
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 45000);
     fetch(config.rosterApiUrl, { signal: controller.signal, cache: 'no-store' })
@@ -73,13 +74,13 @@ function useRoster(config) {
         if (!valid.length) throw new Error('No valid players');
         setPlayers(valid);
       }).catch(() => {})
-      .finally(() => clearTimeout(timer));
+      .finally(() => { clearTimeout(timer); if (!controller.signal.aborted) setLoading(false); });
     return () => { clearTimeout(timer); controller.abort(); };
-  }, [config.rosterApiUrl]);
-  return players;
+  }, [config.ready, config.rosterApiUrl]);
+  return { players, loading };
 }
 
-function Roster({ players }) {
+function Roster({ players, loading }) {
   const [role, setRole] = useState('all');
   const [query, setQuery] = useState('');
   const counts = useMemo(() => Object.fromEntries(Object.keys(roleNames).map((key) => [key, players.filter((p) => p.role === key).length])), [players]);
@@ -95,8 +96,8 @@ function Roster({ players }) {
     {groups.map((group) => <div className="roster-group" key={group.key}><div className="roster-group-heading"><h3>{group.label}</h3><span>{group.players.length} {group.players.length === 1 ? 'postać' : group.players.length >= 2 && group.players.length <= 4 ? 'postacie' : 'postaci'}</span></div><div className="roster-grid" aria-label={`${group.label}, lista postaci`}>{group.players.map((player) => <div className="player-card" style={{ '--class-color': classColors[player.className] || '#b89767' }} key={`${player.name}-${player.realm}`}>
       <img className="player-class-icon" src={`${import.meta.env.BASE_URL}assets/classes/${player.className.toLowerCase().replace(/\s+/g, '-')}.jpg`} alt="" width="34" height="34" loading="lazy" />
       <span className="player-identity"><strong className="player-name">{player.name}</strong><small title={`${player.className}, ${player.realm}`}>{player.className} · {player.realm}</small></span>
-      <span className="player-stat" title="Poziom przedmiotów"><strong>{player.itemLevel ?? 'brak'}</strong><small>ilvl</small></span>
-      <span className="player-stat" title="Rating Mythic+"><strong>{player.score != null ? player.score.toLocaleString('pl-PL') : 'brak'}</strong><small>M+ rating</small></span>
+      <span className="player-stat" title="Poziom przedmiotów"><strong>{player.itemLevel ?? (loading ? <><span className="stat-skeleton" aria-hidden="true" /><span className="sr-only">Ładowanie</span></> : 'brak')}</strong><small>ilvl</small></span>
+      <span className="player-stat" title="Rating Mythic+"><strong>{player.score != null ? player.score.toLocaleString('pl-PL') : (loading ? <><span className="stat-skeleton stat-skeleton-wide" aria-hidden="true" /><span className="sr-only">Ładowanie</span></> : 'brak')}</strong><small>M+ rating</small></span>
     </div>)}</div></div>)}
     {visible.length === 0 && <div className="roster-empty">Nie znaleźliśmy postaci. Zmień frazę lub wybierz inną rolę.</div>}
   </div></section>;
@@ -120,24 +121,19 @@ function Progress() {
   const name = progress ? raidNames[progress.slug] || progress.slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) : 'Aktualny raid';
   return <section className="progress-section section-pad" id="raid" aria-labelledby="progress-title"><div className="wrap">
     <div className="section-topline"><span>05 / ZOBACZ NAS W AKCJI</span><span>RAID · MYTHIC</span></div>
-    <div className="progress-heading reveal"><div><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> RAIDING</p><h2 id="progress-title">PROGRESS<br /><em>W PRAKTYCE.</em></h2></div><p>Raidujemy regularnie z myślą o Mythic i Cutting Edge. Zobacz, jak idzie nam w bieżącym raidzie.</p></div>
-    <div className="raid-dashboard"><div className="raid-schedule"><span className="dashboard-label">GODZINY RAIDÓW</span><h3>ŚRODA <span>&</span> CZWARTEK</h3><strong>19:45 do 23:00</strong><p>Dodatkowe raidy odbywają się także w poniedziałki w tych samych godzinach. Aktualne informacje i zapisy na konkretne raidy znajdziesz na naszych kanałach Discorda.</p><External className="text-link raid-discord" href={links.discord}>Zapisy na Discordzie ↗</External></div>
+    <div className="progress-heading reveal"><div><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> RAIDING</p><h2 id="progress-title">PROGRESS<br /><em>W PRAKTYCE.</em></h2></div><p>Zobacz, jak idzie nam w bieżącym raidzie.</p></div>
+    <div className="raid-dashboard"><div className="raid-schedule"><span className="dashboard-label">GODZINY RAIDÓW</span><h3>ŚRODA <span>&</span> CZWARTEK</h3><strong>19:45 - 23:00</strong><p>Czasem raidujemy też w poniedziałek. Terminy i zapisy znajdziesz na Discordzie.</p><External className="text-link raid-discord" href={links.discord}>Zapisy na Discordzie ↗</External></div>
       <div className="live-progress" aria-live="polite"><div className="live-heading"><span className="dashboard-label">AKTUALNY PROGRESS</span><span className={`live-indicator ${progress ? 'ready' : ''}`}>{state}</span></div><h3>{name}</h3><div className="progress-modes">{[['mythic', 'mythic_bosses_killed'], ['heroic', 'heroic_bosses_killed'], ['normal', 'normal_bosses_killed']].map(([difficulty, key]) => <div key={key}><strong>{progress ? `${progress.raid[key] ?? 0}/${progress.raid.total_bosses}` : '?'}</strong><span>{difficulty.toUpperCase()}</span></div>)}</div><p>Zobacz szczegóły raidów i walk naszych graczy.</p><External className="text-link" href={links.rio}>Progress w Raider.IO <span aria-hidden="true">↗</span></External></div>
     </div>
-    <div className="source-grid">{[
-      [links.logs, '01 / COMBAT LOGS', <>WARCRAFT<br />LOGS</>, 'Analiza walk i rankingi'],
-      [links.rio, '02 / PROGRESS', <>RAIDER<span className="source-dot">.</span>IO</>, 'Postępy raidowe gildii'],
-      [links.audit, '03 / TEAM MAIN', <>WOW<br />AUDIT</>, 'Skład, eventy i audit'],
-    ].map(([href, index, title, desc]) => <External className="source-card" href={href} key={href}><span className="source-index">{index}</span><span className="source-title">{title}</span><span className="source-bottom">{desc} <span aria-hidden="true">↗</span></span></External>)}</div>
   </div></section>;
 }
 
 function App() {
-  const [config, setConfig] = useState({});
-  const players = useRoster(config);
+  const [config, setConfig] = useState({ ready: false });
+  const { players, loading: rosterLoading } = useRoster(config);
   const counts = useMemo(() => Object.fromEntries(Object.keys(roleNames).map((key) => [key, players.filter((p) => p.role === key).length])), [players]);
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}site-config.json`, { cache: 'no-store' }).then((res) => res.ok ? res.json() : {}).then(setConfig).catch(() => {});
+    fetch(`${import.meta.env.BASE_URL}site-config.json`, { cache: 'no-store' }).then((res) => res.ok ? res.json() : {}).then((data) => setConfig({ ...data, ready: true })).catch(() => setConfig({ ready: true }));
   }, []);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -151,10 +147,10 @@ function App() {
     <a className="skip-link" href="#main">Przejdź do treści</a><Header />
     <main id="main"><Hero />
       <section className="numbers" aria-label="Skład głównej drużyny"><div className="wrap numbers-grid"><div className="number-lead"><span className="micro-label">DRUŻYNA MAIN</span><strong>Jeden skład.<br />Wiele ról.</strong></div><div className="number"><strong>{players.length}</strong><span>postaci w rosterze</span></div><div className="number"><strong>{counts.tank}<span className="number-accent"> / </span>{counts.heal}</strong><span>tanków / healerów</span></div><div className="number"><strong>{counts.melee + counts.ranged}</strong><span>postaci DPS</span></div></div></section>
-      <section className="intro section-pad" id="o-nas" aria-labelledby="about-title"><div className="wrap intro-grid reveal"><div className="section-heading"><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> KIM JESTEŚMY</p><h2 id="about-title">NAJLEPSZE<br />PULLE ROBI SIĘ<br /><em>RAZEM.</em></h2></div><div className="intro-copy"><p className="large-copy">Critical Error to gildia semi-hardcore na EU Burning Legion. Regularnie raidujemy, wspólnie robimy klucze M+ i budujemy skład z ambicją na Cutting Edge.</p><p>Szukamy ludzi, którzy znają swoją klasę, przygotowują się do walk i potrafią skupić się na mechanikach. Liczą się solidne logi z HC lub Mythic, frekwencja oraz podejście do wspólnego progresu. W składzie Mythic miejsce wypracowuje się grą.</p><a className="text-link" href="#roster">Zobacz wszystkich graczy <span aria-hidden="true">↗</span></a></div></div></section>
-      <Roster players={players} /><Recruitment endpoint={applicationEndpoint} /><MythicPlus players={players} apiUrl={config.rosterApiUrl?.replace(/\/api\/roster$/, '/api/mplus')} assetsBase={import.meta.env.BASE_URL} /><Progress /><Contact />
+      <section className="intro section-pad" id="o-nas" aria-labelledby="about-title"><div className="wrap intro-grid reveal"><div className="section-heading"><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> KIM JESTEŚMY</p><h2 id="about-title">NAJLEPSZE<br />PULLE ROBI SIĘ<br /><em>RAZEM.</em></h2></div><div className="intro-copy"><p className="large-copy">Critical Error to gildia semi-hardcore na EU Burning Legion. Regularnie raidujemy, wspólnie robimy klucze M+ i budujemy skład z ambicją na Cutting Edge.</p><a className="text-link" href="#roster">Zobacz wszystkich graczy <span aria-hidden="true">↗</span></a></div></div></section>
+      <Roster players={players} loading={rosterLoading} /><Recruitment endpoint={applicationEndpoint} /><MythicPlus players={players} apiUrl={config.rosterApiUrl?.replace(/\/api\/roster$/, '/api/mplus')} configReady={config.ready} assetsBase={import.meta.env.BASE_URL} /><Progress /><Contact />
     </main>
-    <footer className="site-footer"><div className="wrap footer-top"><Brand /><p>Do zobaczenia po drugiej stronie portalu.</p></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} CRITICAL ERROR</span><div><External href={links.discord}>Discord ↗</External><External href={links.audit}>WoWAudit ↗</External><External href={links.logs}>Warcraft Logs ↗</External><External href={links.rio}>Raider.IO ↗</External></div></div><div className="wrap legal-note">Fanowska strona gildii. World of Warcraft i związane z nim nazwy należą do Blizzard Entertainment.</div></footer>
+    <footer className="site-footer"><div className="wrap footer-top"><Brand /><p>Do zobaczenia po drugiej stronie portalu.</p></div><div className="wrap footer-bottom"><span>© {new Date().getFullYear()} CRITICAL ERROR</span><div><External href={links.discord}>Discord ↗</External><External href={links.logs}>Warcraft Logs ↗</External><External href={links.rio}>Raider.IO ↗</External></div></div><div className="wrap legal-note">Fanowska strona gildii. World of Warcraft i związane z nim nazwy należą do Blizzard Entertainment.</div></footer>
   </>;
 }
 
