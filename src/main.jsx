@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { rosterSnapshot } from './data/roster.js';
+import { fallbackProgress, fallbackRoster } from './data/liveSnapshot.js';
 import Recruitment from './Recruitment.jsx';
 import { MythicPlus, Contact } from './Sections.jsx';
 import './style.css';
@@ -57,7 +57,7 @@ function Hero() {
 }
 
 function useRoster(config) {
-  const [players, setPlayers] = useState(rosterSnapshot);
+  const [players, setPlayers] = useState(fallbackRoster);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (!config.ready) return;
@@ -104,8 +104,8 @@ function Roster({ players, loading }) {
 }
 
 function Progress() {
-  const [progress, setProgress] = useState(null);
-  const [state, setState] = useState('Sprawdzamy progress…');
+  const [progress, setProgress] = useState(fallbackProgress);
+  const [state, setState] = useState('Ostatni zapisany wynik');
   useEffect(() => {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 10000);
@@ -113,7 +113,7 @@ function Progress() {
     fetch(`https://raider.io/api/v1/guilds/profile?${params}`, { signal: controller.signal })
       .then((response) => { if (!response.ok) throw new Error('API error'); return response.json(); })
       .then((data) => { const [slug, raid] = Object.entries(data.raid_progression || {})[0] || []; if (!raid?.total_bosses) throw new Error('No current raid'); setProgress({ slug, raid }); setState(''); })
-      .catch(() => setState('Nie udało się pobrać progressu'))
+      .catch(() => setState('Ostatni zapisany wynik'))
       .finally(() => clearTimeout(timer));
     return () => { clearTimeout(timer); controller.abort(); };
   }, []);
@@ -123,7 +123,7 @@ function Progress() {
     <div className="section-topline"><span>05 / ZOBACZ NAS W AKCJI</span><span>RAID · MYTHIC</span></div>
     <div className="progress-heading reveal"><div><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> RAIDING</p><h2 id="progress-title">PROGRESS<br /><em>W PRAKTYCE.</em></h2></div><p>Zobacz, jak idzie nam w bieżącym raidzie.</p></div>
     <div className="raid-dashboard"><div className="raid-schedule"><span className="dashboard-label">GODZINY RAIDÓW</span><h3>ŚRODA <span>&</span> CZWARTEK</h3><strong>19:45 - 23:00</strong><p>Czasem raidujemy też w poniedziałek. Terminy i zapisy znajdziesz na Discordzie.</p><External className="text-link raid-discord" href={links.discord}>Zapisy na Discordzie ↗</External></div>
-      <div className="live-progress" aria-live="polite"><div className="live-heading"><span className="dashboard-label">AKTUALNY PROGRESS</span><span className={`live-indicator ${progress ? 'ready' : ''}`}>{state}</span></div><h3>{name}</h3><div className="progress-modes">{[['mythic', 'mythic_bosses_killed'], ['heroic', 'heroic_bosses_killed'], ['normal', 'normal_bosses_killed']].map(([difficulty, key]) => <div key={key}><strong>{progress ? `${progress.raid[key] ?? 0}/${progress.raid.total_bosses}` : '?'}</strong><span>{difficulty.toUpperCase()}</span></div>)}</div><p>Zobacz szczegóły raidów i walk naszych graczy.</p><External className="text-link" href={links.rio}>Progress w Raider.IO <span aria-hidden="true">↗</span></External></div>
+      <div className="live-progress" aria-live="polite"><div className="live-heading"><span className="dashboard-label">AKTUALNY PROGRESS</span><span className={`live-indicator ${!state ? 'ready' : ''}`}>{state}</span></div><h3>{name}</h3><div className="progress-modes">{[['mythic', 'mythic_bosses_killed'], ['heroic', 'heroic_bosses_killed'], ['normal', 'normal_bosses_killed']].map(([difficulty, key]) => <div key={key}><strong>{progress ? `${progress.raid[key] ?? 0}/${progress.raid.total_bosses}` : '?'}</strong><span>{difficulty.toUpperCase()}</span></div>)}</div><p>Zobacz szczegóły raidów i walk naszych graczy.</p><External className="text-link" href={links.rio}>Progress w Raider.IO <span aria-hidden="true">↗</span></External></div>
     </div>
   </div></section>;
 }
