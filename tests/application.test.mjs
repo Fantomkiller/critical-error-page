@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import worker from '../server/worker.js';
+import worker from '../server/api.js';
 
 const application = {
   roles: ['heal'], className: 'Paladin', specialization: 'Holy',

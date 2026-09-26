@@ -32,7 +32,7 @@ jobs:
         run: npx vite build && node scripts/configure-pages.mjs
         env:
           GITHUB_PAGES: 'true'
-          GUILD_WORKER_URL: ${{ vars.GUILD_WORKER_URL }}
+          GUILD_API_URL: ${{ vars.GUILD_API_URL }}
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact

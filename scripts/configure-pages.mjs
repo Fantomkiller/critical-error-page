@@ -2,12 +2,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const path = new URL('../dist/site-config.json', import.meta.url);
 const config = JSON.parse(await readFile(path, 'utf8'));
-const address = process.env.GUILD_WORKER_URL?.trim();
+const address = process.env.GUILD_API_URL?.trim();
 if (address) {
-  const worker = new URL(address);
-  if (worker.protocol !== 'https:' || worker.username || worker.password || worker.search || worker.hash || worker.pathname !== '/') throw new Error('GUILD_WORKER_URL must be an HTTPS origin, for example https://example.workers.dev/');
-  config.rosterApiUrl = new URL('/api/roster', worker).href;
-  config.applicationEndpoint = new URL('/api/apply', worker).href;
+  const api = new URL(address);
+  if (api.protocol !== 'https:' || api.username || api.password || api.search || api.hash || api.pathname !== '/') throw new Error('GUILD_API_URL must be an HTTPS origin, for example https://api.example.com/');
+  config.rosterApiUrl = new URL('/api/roster', api).href;
+  config.applicationEndpoint = new URL('/api/apply', api).href;
 } else {
   config.rosterApiUrl = '';
   config.applicationEndpoint = '';

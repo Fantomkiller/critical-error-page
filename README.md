@@ -1,6 +1,6 @@
 # Critical Error
 
-Strona gildii World of Warcraft Critical Error (EU Burning Legion). React 19 i Vite budują frontend, a Cloudflare Worker obsługuje skład oraz zgłoszenia rekrutacyjne.
+Strona gildii World of Warcraft Critical Error (EU Burning Legion). React 19 i Vite budują frontend, a własny backend Node.js obsługuje skład, ranking M+ i zgłoszenia rekrutacyjne.
 
 ## Lokalnie
 
@@ -11,6 +11,8 @@ npm run dev
 
 Vite udostępnia także lokalne `/api/roster`, `/api/mplus` i `/api/apply`. Roster Main bez klucza korzysta z zapisanej listy, a ranking M+ pobiera gotową topkę całej gildii z Raider.IO. Formularz bez webhooka przygotowuje treść do ręcznego przekazania na Discordzie. Aby korzystać z API WoWAudit dla rosteru Main w lokalnym podglądzie, uruchom Vite z `WOWAUDIT_API_KEY` w środowisku. Nie zapisuj klucza w `public/` ani w repozytorium.
 
+Sam backend można uruchomić poleceniem `npm run start:api`. Domyślnie nasłuchuje na `127.0.0.1:8787`. Ustaw `PORT` i `HOST`, jeśli potrzebujesz innego adresu, a `WOWAUDIT_API_KEY` i `DISCORD_APPLICATION_WEBHOOK` przekaż jako zmienne środowiskowe procesu. `GET /health` sprawdza, czy proces działa.
+
 Sprawdzenie zmian:
 
 ```bash
@@ -19,18 +21,18 @@ npm run build
 
 ## Dane składu
 
-Worker pobiera listę Main z prywatnego API WoWAudit, a ilvl i wynik M+ każdej postaci z Raider.IO. Osobny ranking M+ pobiera gotową, posortowaną listę całej gildii z tego samego źródła danych, którego używa strona Raider.IO. Z pierwszej strony bierze Top 10: nick, klasę i rating, bez osobnych zapytań o profile postaci. Dlatego tabela Top 10 nie pokazuje ilvl. Aktualny sezon rozpoznaje po nagłówku przekierowania strony rankingu. Roster odświeża się po 5 minutach, ranking po 15 minutach. Po tym czasie Worker od razu zwraca ostatni wynik i pobiera nowy w tle; przechowuje go na brzegu do 24 godzin. Przy pierwszym pobraniu strona pokazuje skeleton. Nie ma crona ani zapisywania wyników do GitHuba. Progress raidowy jest pobierany bezpośrednio z Raider.IO w przeglądarce.
+Backend pobiera listę Main z prywatnego API WoWAudit, a ilvl i wynik M+ każdej postaci z Raider.IO. Osobny ranking M+ pobiera gotową, posortowaną listę całej gildii z tego samego źródła danych, którego używa strona Raider.IO. Z pierwszej strony bierze Top 10: nick, klasę i rating, bez osobnych zapytań o profile postaci. Dlatego tabela Top 10 nie pokazuje ilvl. Aktualny sezon rozpoznaje po nagłówku przekierowania strony rankingu. Roster odświeża się po 5 minutach, ranking po 15 minutach. Po tym czasie backend od razu zwraca ostatni wynik z pamięci procesu i pobiera nowy w tle. Po restarcie procesu pierwszy odczyt wymaga pobrania danych; w tym czasie strona pokazuje skeleton. Nie ma crona ani zapisywania wyników do GitHuba. Progress raidowy jest pobierany bezpośrednio z Raider.IO w przeglądarce.
 
-WoWAudit wymaga klucza API zespołu. Administrator zespołu powinien zalogować się na [WoWAudit API](https://wowaudit.com/api), wybrać właściwy zespół i skopiować klucz. Dodaj go w repozytorium GitHub jako sekret Actions o nazwie `WOWAUDIT_API_KEY`. Workflow przekaże go do Cloudflare Workera podczas wdrożenia. Bez niego Worker używa zapisanej listy Main z `src/data/roster.js`, więc zmiany członkostwa nie są automatyczne. Statystyki tych postaci nadal pobiera na żądanie. Sekret pozostaje po stronie Workera i nie trafia do publicznego JSON-a ani kodu strony. Po zmianie klucza uruchom wdrożenie Workera ponownie i poczekaj do pięciu minut na nowy odczyt.
+WoWAudit wymaga klucza API zespołu. Administrator zespołu powinien zalogować się na [WoWAudit API](https://wowaudit.com/api), wybrać właściwy zespół i skopiować klucz. Ustaw `WOWAUDIT_API_KEY` tylko w środowisku backendu. Bez niego backend używa zapisanej listy Main z `src/data/roster.js`, więc zmiany członkostwa nie są automatyczne. Statystyki tych postaci nadal pobiera na żądanie. Klucz nie trafia do publicznego JSON-a ani kodu strony.
 
 ## Rekrutacja
 
-Formularz wymaga pełnej, unikalnej nazwy użytkownika Discord (np. `gracz.123`), godzin krótkiej rozmowy, oczekiwań wobec gildii i opisu realnej dostępności. Po udanej wysyłce strona kieruje kandydata na serwer Discord. Worker wysyła zgłoszenie na kanał przez `DISCORD_APPLICATION_WEBHOOK`. Webhook nie może wysyłać prywatnej wiadomości do kandydata; do automatycznej wiadomości potrzebny byłby bot, konto kandydata na serwerze i osobna integracja. Sama znajomość nazwy użytkownika też nie gwarantuje kontaktu, jeśli kandydat nie dołączy do serwera i ograniczył zaproszenia do znajomych. Gdy endpoint nie działa, kandydat może skopiować zgłoszenie i wkleić je na Discordzie.
+Formularz wymaga pełnej, unikalnej nazwy użytkownika Discord (np. `gracz.123`), godzin krótkiej rozmowy, oczekiwań wobec gildii i opisu realnej dostępności. Po udanej wysyłce strona kieruje kandydata na serwer Discord. Backend wysyła zgłoszenie na kanał przez `DISCORD_APPLICATION_WEBHOOK`. Webhook nie może wysyłać prywatnej wiadomości do kandydata; do automatycznej wiadomości potrzebny byłby bot, konto kandydata na serwerze i osobna integracja. Sama znajomość nazwy użytkownika też nie gwarantuje kontaktu, jeśli kandydat nie dołączy do serwera i ograniczył zaproszenia do znajomych. Gdy endpoint nie działa, kandydat może skopiować zgłoszenie i wkleić je na Discordzie.
 
 ## Wdrożenie
 
-`.github/workflows/deploy.yml` buduje i publikuje Workera po pushu do `master` lub ręcznym uruchomieniu. W `Settings → Secrets and variables → Actions → Repository secrets` ustaw `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN` i `WOWAUDIT_API_KEY`. Jeśli zgłoszenia mają automatycznie trafiać na kanał Discord, dodaj także `DISCORD_APPLICATION_WEBHOOK`. Bez webhooka roster działa, a formularz przygotowuje wiadomość do ręcznego przekazania. Wartości sekretów pozostają ukryte. Adres opublikowanego Workera będzie widoczny w logu wdrożenia.
+`.github/workflows/pages.yml` publikuje statyczną wersję GitHub Pages. Backend Node.js trzeba uruchomić na własnym serwerze dostępnym pod adresem HTTPS, np. `https://api.example.com/`, z przekierowaniem do lokalnego portu procesu. GitHub Pages nie uruchamia Node.js.
 
-`.github/workflows/pages.yml` publikuje statyczną wersję GitHub Pages. Aby korzystała z tego samego Workera, ustaw w `Settings → Secrets and variables → Actions → Variables` zmienną repozytorium `GUILD_WORKER_URL` na sam adres Workera z logu, na przykład `https://twoj-worker.workers.dev/`. Skrypt dopisuje `/api/roster` i `/api/apply` podczas budowania. Po ustawieniu zmiennej uruchom ponownie workflow **Deploy GitHub Pages**. Bez niej Pages pokazuje zapisany skład, a formularz przygotowuje wiadomość do ręcznego wysłania. Nie używa starego adresu Sites.
+Gdy backend ma publiczny adres, ustaw w `Settings → Secrets and variables → Actions → Variables` zmienną repozytorium `GUILD_API_URL` na jego bazowy adres HTTPS, bez ścieżki. Uruchom ponownie workflow **Deploy GitHub Pages**. Skrypt dopisze `/api/roster`, `/api/mplus` i `/api/apply` podczas budowania. Bez tej zmiennej Pages pokazuje zapisany skład, nie ma rankingu na żywo, a formularz przygotowuje wiadomość do ręcznego wysłania.
 
 `public/assets/hero.webp` jest oryginalną ilustracją przygotowaną dla strony. Strona jest projektem fanowskim; World of Warcraft i związane z nim nazwy należą do Blizzard Entertainment.

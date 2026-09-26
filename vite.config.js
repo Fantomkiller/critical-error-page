@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import worker from './server/worker.js';
+import api from './server/api.js';
 import { rosterSnapshot } from './src/data/roster.js';
 
 const localCache = {};
@@ -15,7 +15,7 @@ const localApi = {
         for (const [key, value] of Object.entries(req.headers)) if (value) headers.set(key, Array.isArray(value) ? value.join(', ') : value);
         const body = ['POST', 'PUT', 'PATCH'].includes(req.method) ? Buffer.concat(await Array.fromAsync(req)).toString() : undefined;
         const request = new Request(url, { method: req.method, headers, body });
-        const response = await worker.fetch(request, { WOWAUDIT_API_KEY: process.env.WOWAUDIT_API_KEY, DISCORD_APPLICATION_WEBHOOK: process.env.DISCORD_APPLICATION_WEBHOOK, ROSTER_FALLBACK: rosterSnapshot, ROSTER_CACHE: localCache, MPLUS_CACHE: localMplusCache });
+        const response = await api.fetch(request, { WOWAUDIT_API_KEY: process.env.WOWAUDIT_API_KEY, DISCORD_APPLICATION_WEBHOOK: process.env.DISCORD_APPLICATION_WEBHOOK, ROSTER_FALLBACK: rosterSnapshot, ROSTER_CACHE: localCache, MPLUS_CACHE: localMplusCache });
         res.statusCode = response.status;
         response.headers.forEach((value, key) => res.setHeader(key, value));
         res.end(Buffer.from(await response.arrayBuffer()));
