@@ -31,7 +31,7 @@ function External({ href, children, ...props }) {
 const brandTheme = (theme) => theme.startsWith('neutral') ? 'neutral' : theme;
 
 function Brand({ theme }) {
-  if (theme === 'neutral-flashy') return <a className="brand brand-graphic" href="#top" aria-label="Critical Error, strona główna">
+  if (theme === 'neutral-flashy') return <a className="brand brand-graphic logo-animated" href="#top" aria-label="Critical Error, strona główna" style={{ '--logo-mask': `url("${import.meta.env.BASE_URL}assets/brand/critical-error-neutral.svg")` }}>
     <img className="brand-wordmark" src={`${import.meta.env.BASE_URL}assets/brand/critical-error-neutral.svg`} alt="" width="2172" height="724" />
   </a>;
   return <a className="brand" href="#top" aria-label="Critical Error, strona główna">
@@ -54,11 +54,13 @@ function Header({ theme, onThemeChange }) {
 }
 
 function Hero({ theme }) {
+  const stackedLogo = theme === 'neutral-flashy';
+  const logoUrl = `${import.meta.env.BASE_URL}assets/brand/${stackedLogo ? 'critical-error-neutral-stacked.svg' : `critical-error-${brandTheme(theme)}.png`}`;
   return <section className="hero" aria-labelledby="hero-title">
     <div className="hero-art" role="img" aria-label={['dornogal', 'neutral', 'neutral-flashy', 'neutral-classic', 'blue', 'green'].includes(theme) ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
     <div className="hero-content wrap">
       <p className="eyebrow"><span className="eyebrow-line" /> WORLD OF WARCRAFT <span className="eyebrow-separator">/</span> EU BURNING LEGION</p>
-      <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><img src={`${import.meta.env.BASE_URL}assets/brand/critical-error-${brandTheme(theme)}.png`} alt="" width="1774" height="887" /></h1>
+      <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><span className={stackedLogo ? 'logo-art logo-animated' : 'logo-art'} style={stackedLogo ? { '--logo-mask': `url("${logoUrl}")` } : undefined}><img src={logoUrl} alt="" width={stackedLogo ? 1177 : 1774} height={stackedLogo ? 528 : 887} /></span></h1>
       <p className="hero-lead">Semi-hardcore. Regularny progres. Cel: <strong>Cutting Edge.</strong></p>
       <div className="hero-actions"><a className="button button-primary" href="#rekrutacja">Zgłoś się do gildii <span aria-hidden="true">↗</span></a><a className="button button-ghost" href="#roster">Poznaj nasz skład <span aria-hidden="true">↗</span></a></div>
     </div>

@@ -5,8 +5,16 @@
 [data-theme=neutral-flashy] .brand-graphic{flex:none}
 [data-theme=neutral-flashy] .brand-wordmark{display:block;width:240px;height:44px;object-fit:contain}
 [data-theme=neutral-flashy] .footer-top .brand-wordmark{width:320px;height:60px}
+:root[data-theme=neutral-flashy] .hero h1.hero-logo{width:min(430px,45vw)}
+:root[data-theme=neutral-flashy] .hero-logo img{height:auto;object-fit:contain}
+[data-theme=neutral-flashy] .logo-art{display:block}
+[data-theme=neutral-flashy] .logo-animated{position:relative;isolation:isolate}
+[data-theme=neutral-flashy] .logo-animated::after{content:'';position:absolute;inset:0;pointer-events:none;mask-image:var(--logo-mask);mask-size:contain;mask-position:center;mask-repeat:no-repeat;background:linear-gradient(110deg,transparent,rgba(255,255,255,.55),transparent) no-repeat -50% 0 / 30% 100%;opacity:0;transition:background-position 900ms ease,opacity 200ms ease}
+[data-theme=neutral-flashy] .logo-animated:is(:hover,:focus-visible)::after{background-position:150% 0;opacity:1}
 @media(max-width:1100px){[data-theme=neutral-flashy] .nav-shell .brand-wordmark{width:190px;height:38px}}
+@media(max-width:800px){:root[data-theme=neutral-flashy] .hero h1.hero-logo{width:min(430px,75vw)}}
 @media(max-width:580px){[data-theme=neutral-flashy] .nav-shell .brand-wordmark{width:140px;height:30px}[data-theme=neutral-flashy] .footer-top .brand-wordmark{width:min(300px,80vw);height:55px}}
+@media(max-width:580px){:root[data-theme=neutral-flashy] .hero h1.hero-logo{width:100%;max-width:300px}}
 
 /* Interaction feedback changes light and edges, never position. */
 [data-theme=neutral-flashy] :is(a,button,input,select,textarea,.player-card,.mythic-card,.search-box,.availability label){transition:color var(--ui-motion),background-color var(--ui-motion),border-color var(--ui-motion),box-shadow var(--ui-motion),opacity var(--ui-motion)}
@@ -79,4 +87,4 @@
 
 @media(max-width:580px){[data-theme=neutral-flashy] .contact-grid h2{font-size:clamp(1.8rem,8vw,2.6rem)}[data-theme=neutral-flashy] .mplus-table{min-width:0}[data-theme=neutral-flashy] .mplus-table :is(th,td){padding:10px 6px}[data-theme=neutral-flashy] .mplus-rank{width:34px}[data-theme=neutral-flashy] .mplus-identity{gap:8px}[data-theme=neutral-flashy] .mplus-identity img{width:28px;height:28px}[data-theme=neutral-flashy] .mplus-identity span{max-width:135px}[data-theme=neutral-flashy] .mplus-score strong{font-size:1rem}}
 
-@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before,[data-theme=neutral-flashy] :is(.player-card,.mplus-leader)::after{display:none}}
+@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before,[data-theme=neutral-flashy] :is(.player-card,.mplus-leader,.logo-animated)::after{display:none}}
