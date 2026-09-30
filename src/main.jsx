@@ -32,7 +32,7 @@ function External({ href, children, ...props }) {
 const brandTheme = (theme) => theme.startsWith('neutral') ? 'neutral' : theme;
 
 function Brand({ theme }) {
-  if (theme === 'neutral-flashy') return <a className="brand brand-graphic logo-animated" href="#top" aria-label="Critical Error, strona główna" style={{ '--logo-mask': `url("${import.meta.env.BASE_URL}assets/brand/critical-error-neutral.svg")` }}>
+  if (theme === 'neutral-flashy') return <a className="brand brand-graphic logo-animated" href="#top" aria-label="Critical Error, strona główna">
     <Logo className="brand-wordmark" />
   </a>;
   return <a className="brand" href="#top" aria-label="Critical Error, strona główna">
@@ -61,7 +61,7 @@ function Hero({ theme }) {
     <div className="hero-art" role="img" aria-label={['dornogal', 'neutral', 'neutral-flashy', 'neutral-classic', 'blue', 'green'].includes(theme) ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
     <div className="hero-content wrap">
       <p className="eyebrow"><span className="eyebrow-line" /> WORLD OF WARCRAFT <span className="eyebrow-separator">/</span> EU BURNING LEGION</p>
-      <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><span className={stackedLogo ? 'logo-art logo-animated' : 'logo-art'} style={stackedLogo ? { '--logo-mask': `url("${logoUrl}")` } : undefined}>{stackedLogo ? <Logo stacked /> : <img src={logoUrl} alt="" width="1774" height="887" />}</span></h1>
+      <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><span className={stackedLogo ? 'logo-art logo-animated' : 'logo-art'}>{stackedLogo ? <Logo stacked /> : <img src={logoUrl} alt="" width="1774" height="887" />}</span></h1>
       <p className="hero-lead">Semi-hardcore. Regularny progres. Cel: <strong>Cutting Edge.</strong></p>
       <div className="hero-actions"><a className="button button-primary" href="#rekrutacja">Zgłoś się do gildii <span aria-hidden="true">↗</span></a><a className="button button-ghost" href="#roster">Poznaj nasz skład <span aria-hidden="true">↗</span></a></div>
     </div>

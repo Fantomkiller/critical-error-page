@@ -20,6 +20,7 @@ const uncutO = `M-13 30 C-11.57 31.41 -11.57 31.41 -9.56 33.06
 
 export default function Logo({ stacked: isStacked = false, className = '' }) {
   const maskId = `${useId()}-slash`;
+  const glintId = `${maskId}-glint`;
   const element = useRef(null);
   const [visible, setVisible] = useState(false);
   const markup = useMemo(() => {
@@ -30,10 +31,13 @@ export default function Logo({ stacked: isStacked = false, className = '' }) {
       .replace(/ id="(?:critical|error)"/g, '')
       .replace(/<path\b[^>]*>/g, (path) => {
         if (/fill="#F6F0E8"/i.test(path) && path.includes('translate(1921,249)')) return path.replace(/d="[^"]*"/, `d="${uncutO}"`);
-        return /fill="#(?:AC0504|A70C0B)"/i.test(path) ? path.replace('<path', `<path mask="url(#${maskId})"`) : path;
+        if (!/fill="#(?:AC0504|A70C0B)"/i.test(path)) return path;
+        const slash = path.replace(/ transform="[^"]*"/, '');
+        const reflection = slash.replace(/fill="[^"]*"/, 'fill="white"').replace('<path', `<path mask="url(#${glintId})"`);
+        return `<g transform="translate(1921,249)" mask="url(#${maskId})">${slash}${reflection}</g>`;
       })
-      .replace(/(<svg\b[^>]*>)/, `$1<defs><mask id="${maskId}" maskUnits="userSpaceOnUse" x="-180" y="-30" width="220" height="290"><path class="logo-slash-reveal" d="M 7 -10 L -159 220" fill="none" stroke="white" stroke-width="50" pathLength="1"/></mask></defs>`);
-  }, [isStacked, maskId]);
+      .replace(/(<svg\b[^>]*>)/, `$1<defs><mask id="${maskId}" maskUnits="userSpaceOnUse" x="-180" y="-30" width="220" height="290"><path class="logo-slash-reveal" d="M 7 -10 L -159 220" fill="none" stroke="white" stroke-width="50" pathLength="1"/></mask><mask id="${glintId}" maskUnits="userSpaceOnUse" x="-180" y="-30" width="220" height="290"><path class="logo-slash-glint" d="M 7 -10 L -159 220" fill="none" stroke="white" stroke-width="50" pathLength="1"/></mask></defs>`);
+  }, [isStacked, maskId, glintId]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
