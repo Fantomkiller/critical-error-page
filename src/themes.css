@@ -214,26 +214,6 @@
 [data-theme^=neutral] .contact-section{background:linear-gradient(125deg,rgba(157,0,0,.09),transparent 55%),#41494c}
 
 /* Stronger neutral option: effects belong to the page, never the logo. */
-:root[data-theme=neutral-flashy]{--red:#b51212;--wine:#7a0808;--gold:#b51212;--accent-red:#b51212;--line:rgba(221,61,61,.3)}
-[data-theme=neutral-flashy] .hero-shade{background:radial-gradient(ellipse at 15% 75%,rgba(157,0,0,.23),transparent 48%),linear-gradient(90deg,rgba(20,24,26,.93),rgba(29,35,37,.65) 28%,rgba(36,43,45,.15) 65%),linear-gradient(0deg,#191d20,rgba(23,22,34,.3) 18%,transparent 48%)}
-[data-theme=neutral-flashy] .site-header{border-bottom-color:rgba(211,34,34,.5);box-shadow:0 3px 22px rgba(157,0,0,.1)}
-[data-theme=neutral-flashy] :is(.button,.nav-join){position:relative;isolation:isolate;overflow:hidden}
-[data-theme=neutral-flashy] .button-primary{background:linear-gradient(115deg,#b51212,#ad0b0b 48%,#780000);border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.35),0 6px 25px rgba(157,0,0,.32)}
-[data-theme=neutral-flashy] .button-primary:hover{background:linear-gradient(115deg,#bb1717,#a30909 48%,#800000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.6),0 8px 32px rgba(190,10,10,.48)}
-[data-theme=neutral-flashy] :is(.button,.nav-join)::before{content:'';position:absolute;inset:-60% auto -60% -60%;width:30%;background:linear-gradient(90deg,transparent,rgba(157,0,0,.3),transparent);transform:skewX(-22deg);transition:left .55s ease;pointer-events:none;z-index:-1}
-[data-theme=neutral-flashy] :is(.button,.nav-join):hover::before{left:140%}
-[data-theme=neutral-flashy] :is(.button-ghost,.nav-join):hover{background:linear-gradient(120deg,rgba(196,14,14,.34),rgba(157,0,0,.12));box-shadow:inset 0 1px rgba(157,0,0,.25),0 4px 22px rgba(157,0,0,.24);border-color:#790000}
-[data-theme=neutral-flashy] :is(h2 em,.mplus-leaderboard-head h3 em){color:#b51212}
-[data-theme=neutral-flashy] :is(.intro h2 em,.progress-heading h2 em){color:#b51212}
-[data-theme=neutral-flashy] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(185,13,13,.23),transparent 50%),#1d2528}
-[data-theme=neutral-flashy] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(185,13,13,.22),transparent 48%),#242c2f}
-[data-theme=neutral-flashy] :is(.player-card,.mythic-card,.role-card){transition:background .2s,border-color .2s,box-shadow .2s}
-[data-theme=neutral-flashy] :is(.player-card,.mythic-card,.role-card):hover{background:linear-gradient(120deg,rgba(151,20,20,.26),rgba(48,59,64,.98));border-color:#b13838;box-shadow:inset 0 1px rgba(157,0,0,.17),0 3px 18px rgba(157,0,0,.13)}
-[data-theme=neutral-flashy] .role-card.selected{background:linear-gradient(120deg,#701f1f,#422827);border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.25),0 0 18px rgba(157,0,0,.18)}
-[data-theme=neutral-flashy] .filter.active::after{background:linear-gradient(90deg,#b51212,#b51212);box-shadow:0 1px 8px rgba(215,20,20,.4)}
-[data-theme=neutral-flashy] .contact-section{background:radial-gradient(ellipse at 0% 100%,rgba(157,0,0,.25),transparent 60%),#41494c;border-top-color:#aa2727}
-[data-theme=neutral-flashy] ::selection{background:#9d0000;color:#fff4ef}
-@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before{display:none}[data-theme=neutral-flashy] :is(.button,.player-card,.mythic-card,.role-card){transition:none}}
 
 [data-theme^=neutral] .nav-join{color:var(--cream);border-color:rgba(157,0,0,.65)}
 [data-theme^=neutral] ::selection{background:#9d0000;color:#fff4ef}

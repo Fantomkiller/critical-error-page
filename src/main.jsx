@@ -5,6 +5,7 @@ import Recruitment from './Recruitment.jsx';
 import { MythicPlus, Contact } from './Sections.jsx';
 import './style.css';
 import './themes.css';
+import './neutral-flash.css';
 
 const links = {
   discord: 'https://discord.gg/SeJ8mTBdGX',
