@@ -1,6 +1,6 @@
 # Wszystkie propozycje logo i emblematów Critical Error
 
-Zapisane lokalnie w repo: **32 grafiki**. Każdy zestaw ma własny README z promptami.
+Zapisane lokalnie w repo: **38 grafik**. Każdy zestaw ma własny README z promptami.
 
 ## Pierwsze koncepcje
 
@@ -148,3 +148,31 @@ Te same litery i konstrukcja ramy, palety dopasowane do motywu. Prompty i źród
 ### emblem-dalaran
 
 ![emblem-dalaran](theme-variants/emblem-dalaran.png)
+
+## Neutralny, niebieski i zielony
+
+Prompty: `../extra-theme-graphics.md`.
+
+### critical-error-neutral
+
+![critical-error-neutral](theme-variants/critical-error-neutral.png)
+
+### emblem-neutral
+
+![emblem-neutral](theme-variants/emblem-neutral.png)
+
+### critical-error-blue
+
+![critical-error-blue](theme-variants/critical-error-blue.png)
+
+### emblem-blue
+
+![emblem-blue](theme-variants/emblem-blue.png)
+
+### critical-error-green
+
+![critical-error-green](theme-variants/critical-error-green.png)
+
+### emblem-green
+
+![emblem-green](theme-variants/emblem-green.png)

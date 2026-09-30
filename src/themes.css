@@ -10,52 +10,52 @@
 @media(max-width:800px){.hero h1.hero-logo{width:min(440px,75vw)}.brand-emblem{width:42px;height:42px}}
 @media(max-width:580px){.hero h1.hero-logo{width:100%;max-width:300px;margin:24px 0}.brand-emblem{width:36px;height:36px}.hero-lead{max-width:350px}}
 
-:root:is([data-theme=dornogal],[data-theme=dalaran]){--bg:#10191e;--panel:#18262d;--panel2:#25343c;--wine:#66513a;--red:#bf9860;--cream:#eae4d6;--muted:#a5b3b6;--gold:#b99d70;--line:rgba(183,163,125,.22)}
-:is([data-theme=dornogal],[data-theme=dalaran]) ::selection{background:#675842;color:#fff}
-:is([data-theme=dornogal],[data-theme=dalaran]) .site-header{background:linear-gradient(180deg,rgba(12,21,27,.95),rgba(17,29,35,.82));border-color:var(--line)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png');background-position:center 52%}
-:is([data-theme=dornogal],[data-theme=dalaran]) .hero-shade{background:linear-gradient(90deg,rgba(10,19,24,.92),rgba(12,22,28,.74) 25%,rgba(15,27,32,.25) 60%,rgba(15,27,32,.05)),linear-gradient(0deg,#10191e,rgba(16,25,30,.4) 17%,transparent 48%)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .hero h1{color:#eee9dd;text-shadow:0 3px 22px rgba(8,17,23,.35)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .hero-lead{color:#d6dcd6}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3){color:#c6b18c}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.title-stop,.brand-slash,.number-accent){color:#b59360}
-:is([data-theme=dornogal],[data-theme=dalaran]) .button-primary{background:#b89a68;border-color:#c3a77a;color:#17232a}
-:is([data-theme=dornogal],[data-theme=dalaran]) .button-primary:hover{background:#ceb382}
-:is([data-theme=dornogal],[data-theme=dalaran]) .button-ghost{background:rgba(18,32,39,.55);border-color:rgba(214,211,191,.45)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .button-ghost:hover{background:#263c47}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.numbers,.site-footer){background:#142127}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.number span:last-child,.footer-top p,.footer-bottom,.legal-note){color:#9bafb5}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.intro,.progress-section){background:#dfded3;color:#24343a}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#696147}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.intro-copy p,.progress-heading>p){color:#566467}
-:is([data-theme=dornogal],[data-theme=dalaran]) .intro-copy .large-copy{color:#2c3c42}
-:is([data-theme=dornogal],[data-theme=dalaran]) .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(74,109,120,.16),transparent 45%),#101b21}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.roster-heading>p,.mythic-layout>p,.mplus-leaderboard-head>p,.role-hint,.roster-status){color:#a6b6ba}
-:is([data-theme=dornogal],[data-theme=dalaran]) .section-topline{color:#a6a991}
-:is([data-theme=dornogal],[data-theme=dalaran]) .player-card{background:linear-gradient(115deg,#20313b,#19282f);border-color:rgba(163,182,187,.17)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .player-card:hover{background:#293d46}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.player-identity small,.player-stat small,.mplus-identity small,.filter,.search-box input::placeholder){color:#9aadb4}
-:is([data-theme=dornogal],[data-theme=dalaran]) .filter.active::after{background:#bca478}
-:is([data-theme=dornogal],[data-theme=dalaran]) .application-section{background:#17262e}
-:is([data-theme=dornogal],[data-theme=dalaran]) .application-form{background:linear-gradient(145deg,#21343e,#192830);box-shadow:none}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.application-aside,.role-card,.availability label,.form-result){background:#24363f}
-:is([data-theme=dornogal],[data-theme=dalaran]) .role-card.selected{background:#45544d;border-color:#bba77d}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#121f27;color:#e8e6db}
-:is([data-theme=dornogal],[data-theme=dalaran]) .application-form select option{background:#17262e}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.application-intro>p:last-child,.application-aside p,.application-aside li,.form-submit p,.contact-hint,.form-grid label small,.profile-links small,.field-optional,.counter){color:#adbdc0}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.form-grid label,.application-form label.form-full,.profile-links label,.availability legend){color:#d0d8d5}
-:is([data-theme=dornogal],[data-theme=dalaran]) .availability input{accent-color:#b69e72}
-:is([data-theme=dornogal],[data-theme=dalaran]) .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(74,114,121,.2),transparent 45%),#122127}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#263a42,#1b2c34);border-color:var(--line)}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.mplus-table th,.mplus-rank,.mplus-source,.mythic-card p){color:#a8b7b9}
-:is([data-theme=dornogal],[data-theme=dalaran]) .mplus-leader:hover td{background:rgba(163,183,172,.08)}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.raid-schedule,.live-progress){background:#ecebe1;border-color:rgba(44,65,70,.18)}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#6d6247}
-:is([data-theme=dornogal],[data-theme=dalaran]) :is(.raid-schedule p,.live-progress p,.progress-modes span,.live-indicator){color:#617074}
-:is([data-theme=dornogal],[data-theme=dalaran]) .contact-section{background:#243941;border-color:var(--line)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .contact-grid p:not(.eyebrow){color:#c1d0d0}
-:is([data-theme=dornogal],[data-theme=dalaran]) .stat-skeleton{background-image:linear-gradient(100deg,#344d58 20%,#617e84 48%,#344d58 76%)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .menu-toggle,:is([data-theme=dornogal],[data-theme=dalaran]) .site-nav.open{background:#192b34}
+:root:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]){--bg:#10191e;--panel:#18262d;--panel2:#25343c;--wine:#66513a;--red:#bf9860;--cream:#eae4d6;--muted:#a5b3b6;--gold:#b99d70;--line:rgba(183,163,125,.22)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) ::selection{background:#675842;color:#fff}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .site-header{background:linear-gradient(180deg,rgba(12,21,27,.95),rgba(17,29,35,.82));border-color:var(--line)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png');background-position:center 52%}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .hero-shade{background:linear-gradient(90deg,rgba(10,19,24,.92),rgba(12,22,28,.74) 25%,rgba(15,27,32,.25) 60%,rgba(15,27,32,.05)),linear-gradient(0deg,#10191e,rgba(16,25,30,.4) 17%,transparent 48%)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .hero h1{color:#eee9dd;text-shadow:0 3px 22px rgba(8,17,23,.35)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .hero-lead{color:#d6dcd6}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3){color:#c6b18c}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.title-stop,.brand-slash,.number-accent){color:#b59360}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .button-primary{background:#b89a68;border-color:#c3a77a;color:#17232a}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .button-primary:hover{background:#ceb382}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .button-ghost{background:rgba(18,32,39,.55);border-color:rgba(214,211,191,.45)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .button-ghost:hover{background:#263c47}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.numbers,.site-footer){background:#142127}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.number span:last-child,.footer-top p,.footer-bottom,.legal-note){color:#9bafb5}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.intro,.progress-section){background:#dfded3;color:#24343a}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#696147}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.intro-copy p,.progress-heading>p){color:#566467}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .intro-copy .large-copy{color:#2c3c42}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(74,109,120,.16),transparent 45%),#101b21}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.roster-heading>p,.mythic-layout>p,.mplus-leaderboard-head>p,.role-hint,.roster-status){color:#a6b6ba}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .section-topline{color:#a6a991}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .player-card{background:linear-gradient(115deg,#20313b,#19282f);border-color:rgba(163,182,187,.17)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .player-card:hover{background:#293d46}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.player-identity small,.player-stat small,.mplus-identity small,.filter,.search-box input::placeholder){color:#9aadb4}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .filter.active::after{background:#bca478}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .application-section{background:#17262e}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .application-form{background:linear-gradient(145deg,#21343e,#192830);box-shadow:none}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.application-aside,.role-card,.availability label,.form-result){background:#24363f}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .role-card.selected{background:#45544d;border-color:#bba77d}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#121f27;color:#e8e6db}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .application-form select option{background:#17262e}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.application-intro>p:last-child,.application-aside p,.application-aside li,.form-submit p,.contact-hint,.form-grid label small,.profile-links small,.field-optional,.counter){color:#adbdc0}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.form-grid label,.application-form label.form-full,.profile-links label,.availability legend){color:#d0d8d5}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .availability input{accent-color:#b69e72}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(74,114,121,.2),transparent 45%),#122127}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#263a42,#1b2c34);border-color:var(--line)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.mplus-table th,.mplus-rank,.mplus-source,.mythic-card p){color:#a8b7b9}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .mplus-leader:hover td{background:rgba(163,183,172,.08)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.raid-schedule,.live-progress){background:#ecebe1;border-color:rgba(44,65,70,.18)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#6d6247}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) :is(.raid-schedule p,.live-progress p,.progress-modes span,.live-indicator){color:#617074}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .contact-section{background:#243941;border-color:var(--line)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .contact-grid p:not(.eyebrow){color:#c1d0d0}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .stat-skeleton{background-image:linear-gradient(100deg,#344d58 20%,#617e84 48%,#344d58 76%)}
+:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .menu-toggle,:is([data-theme=dornogal],[data-theme=dalaran],[data-theme=neutral],[data-theme=blue],[data-theme=green]) .site-nav.open{background:#192b34}
 @media(max-width:1100px){.theme-picker button{padding:6px}.nav-shell{gap:12px}.brand-name{font-size:14px}.site-nav{gap:10px;font-size:10px}}
 @media(max-width:800px){.theme-picker{margin-left:auto}.site-nav{font-size:13px}.nav-shell{gap:13px}}
 @media(max-width:420px){.brand-name{font-size:12px}.brand-name small{font-size:7px;letter-spacing:.15em}.brand{gap:7px}.brand-mark{width:32px;flex-basis:32px}.theme-picker button{font-size:9px;padding:5px}.nav-shell{gap:7px}.menu-toggle{width:36px;flex:none}}
@@ -93,3 +93,102 @@
 /* Ostatnia fraza nagłówka pozostaje razem. */
 #about-title .about-ending{white-space:nowrap}
 @media(max-width:580px){#about-title{font-size:clamp(2rem,9vw,2.9rem)}}
+
+/* blue */
+:root[data-theme=blue]{--bg:#111c29;--panel:#1c2c40;--panel2:#2b4057;--cream:#e4edf2;--muted:#a0b4c6;--gold:#9bb9cf;--line:rgba(155,185,207,.23)}
+[data-theme=blue] .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png')}
+[data-theme=blue] .hero-shade{background:linear-gradient(90deg,rgba(13,24,39,.91),rgba(20,38,59,.67) 28%,rgba(24,43,65,.15) 65%),linear-gradient(0deg,#111c29,rgba(23,22,34,.3) 18%,transparent 48%)}
+[data-theme=blue] .site-header{background:linear-gradient(180deg,rgba(13,24,39,.95),rgba(20,38,59,.86))}
+[data-theme=blue] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#a8c7df}
+[data-theme=blue] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#afc8df}
+[data-theme=blue] :is(.title-stop,.brand-slash,.number-accent){color:#759bbb}
+[data-theme=blue] .button-primary{background:#8aafcd;border-color:#afcce1;color:#162737}
+[data-theme=blue] .button-primary:hover{background:#afcce1}
+[data-theme=blue] :is(.numbers,.site-footer){background:#172536}
+[data-theme=blue] :is(.intro,.progress-section){background:#dce5ec;color:#2d4050}
+[data-theme=blue] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#536f89}
+[data-theme=blue] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(70,110,160,.2),transparent 45%),#142130}
+[data-theme=blue] .player-card{background:linear-gradient(115deg,#23364a,#1d2d40)}
+[data-theme=blue] .player-card:hover{background:#304a63}
+[data-theme=blue] .application-section{background:#1a2b3e}
+[data-theme=blue] .application-form{background:linear-gradient(145deg,#283d53,#1e3043)}
+[data-theme=blue] :is(.application-aside,.role-card,.availability label,.form-result){background:#2a4158}
+[data-theme=blue] .role-card.selected{background:#3c5e7a;border-color:#97bbd9}
+[data-theme=blue] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#122033}
+[data-theme=blue] .application-form select option{background:#1a2b3e}
+[data-theme=blue] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(75,112,155,.19),transparent 45%),#142335}
+[data-theme=blue] :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#2b435a,#203449)}
+[data-theme=blue] :is(.raid-schedule,.live-progress){background:#e8eef3}
+[data-theme=blue] :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#55748f}
+[data-theme=blue] .contact-section{background:#2b435a}
+[data-theme=blue] .stat-skeleton{background-image:linear-gradient(100deg,#344e69 20%,#6c92b0 48%,#344e69 76%)}
+[data-theme=blue] .menu-toggle,[data-theme=blue] .site-nav.open{background:#20344b}
+
+
+/* green */
+:root[data-theme=green]{--bg:#121f1c;--panel:#21352e;--panel2:#304b3f;--cream:#e5ece3;--muted:#a8bcae;--gold:#acc5ab;--line:rgba(172,197,171,.23)}
+[data-theme=green] .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png')}
+[data-theme=green] .hero-shade{background:linear-gradient(90deg,rgba(14,27,20,.91),rgba(24,43,30,.67) 28%,rgba(33,56,36,.15) 65%),linear-gradient(0deg,#121f1c,rgba(23,22,34,.3) 18%,transparent 48%)}
+[data-theme=green] .site-header{background:linear-gradient(180deg,rgba(14,27,20,.95),rgba(24,43,30,.86))}
+[data-theme=green] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#bad0b4}
+[data-theme=green] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#b6cfac}
+[data-theme=green] :is(.title-stop,.brand-slash,.number-accent){color:#7d9e76}
+[data-theme=green] .button-primary{background:#9bb88a;border-color:#bbd0aa;color:#203121}
+[data-theme=green] .button-primary:hover{background:#bbd0aa}
+[data-theme=green] :is(.numbers,.site-footer){background:#1a2d26}
+[data-theme=green] :is(.intro,.progress-section){background:#e1e6dc;color:#354a3a}
+[data-theme=green] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#657d57}
+[data-theme=green] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(76,118,82,.2),transparent 45%),#172821}
+[data-theme=green] .player-card{background:linear-gradient(115deg,#294238,#20362c)}
+[data-theme=green] .player-card:hover{background:#395646}
+[data-theme=green] .application-section{background:#1d3128}
+[data-theme=green] .application-form{background:linear-gradient(145deg,#2c4639,#243b30)}
+[data-theme=green] :is(.application-aside,.role-card,.availability label,.form-result){background:#334e3e}
+[data-theme=green] .role-card.selected{background:#4e6a4c;border-color:#a9c697}
+[data-theme=green] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#17281f}
+[data-theme=green] .application-form select option{background:#1d3128}
+[data-theme=green] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(80,115,74,.19),transparent 45%),#1b2e25}
+[data-theme=green] :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#344e3e,#283f31)}
+[data-theme=green] :is(.raid-schedule,.live-progress){background:#edf0e7}
+[data-theme=green] :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#647e58}
+[data-theme=green] .contact-section{background:#344e3e}
+[data-theme=green] .stat-skeleton{background-image:linear-gradient(100deg,#3e5943 20%,#77966e 48%,#3e5943 76%)}
+[data-theme=green] .menu-toggle,[data-theme=green] .site-nav.open{background:#284132}
+
+
+/* neutral */
+:root[data-theme=neutral]{--bg:#191d20;--panel:#282e32;--panel2:#3c4348;--cream:#ebe9e3;--muted:#b0b7b9;--gold:#bcbcb2;--line:rgba(188,188,178,.23)}
+[data-theme=neutral] .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png')}
+[data-theme=neutral] .hero-shade{background:linear-gradient(90deg,rgba(20,24,26,.91),rgba(29,35,37,.67) 28%,rgba(36,43,45,.15) 65%),linear-gradient(0deg,#191d20,rgba(23,22,34,.3) 18%,transparent 48%)}
+[data-theme=neutral] .site-header{background:linear-gradient(180deg,rgba(20,24,26,.95),rgba(29,35,37,.86))}
+[data-theme=neutral] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#c7c4b8}
+[data-theme=neutral] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#c9c5b8}
+[data-theme=neutral] :is(.title-stop,.brand-slash,.number-accent){color:#9e9d90}
+[data-theme=neutral] .button-primary{background:#b3b0a1;border-color:#d0cdc0;color:#242a2b}
+[data-theme=neutral] .button-primary:hover{background:#d0cdc0}
+[data-theme=neutral] :is(.numbers,.site-footer){background:#22282b}
+[data-theme=neutral] :is(.intro,.progress-section){background:#e4e3dc;color:#3b4345}
+[data-theme=neutral] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#74776c}
+[data-theme=neutral] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(104,112,116,.2),transparent 45%),#1d2528}
+[data-theme=neutral] .player-card{background:linear-gradient(115deg,#343d42,#293236)}
+[data-theme=neutral] .player-card:hover{background:#454f54}
+[data-theme=neutral] .application-section{background:#252d31}
+[data-theme=neutral] .application-form{background:linear-gradient(145deg,#384147,#2d363a)}
+[data-theme=neutral] :is(.application-aside,.role-card,.availability label,.form-result){background:#3e474b}
+[data-theme=neutral] .role-card.selected{background:#5b625e;border-color:#c0c0af}
+[data-theme=neutral] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#1e2629}
+[data-theme=neutral] .application-form select option{background:#252d31}
+[data-theme=neutral] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(111,116,113,.19),transparent 45%),#242c2f}
+[data-theme=neutral] :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#41494c,#303b40)}
+[data-theme=neutral] :is(.raid-schedule,.live-progress){background:#eeeDE7}
+[data-theme=neutral] :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#74796c}
+[data-theme=neutral] .contact-section{background:#41494c}
+[data-theme=neutral] .stat-skeleton{background-image:linear-gradient(100deg,#4c585a 20%,#859291 48%,#4c585a 76%)}
+[data-theme=neutral] .menu-toggle,[data-theme=neutral] .site-nav.open{background:#303a3f}
+
+
+[data-theme=neutral] .hero-art{filter:saturate(.35)}
+[data-theme=blue] .hero-art{filter:saturate(.6)}
+[data-theme=green] .hero-art{filter:saturate(.75)}
+[data-theme=neutral] .hero-logo img{height:100px;object-fit:cover}
+@media(max-width:580px){[data-theme=neutral] .hero-logo img{height:70px}}
