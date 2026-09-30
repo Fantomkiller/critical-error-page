@@ -58,7 +58,7 @@ function Hero({ theme }) {
   const stackedLogo = theme === 'neutral-flashy';
   const logoUrl = `${import.meta.env.BASE_URL}assets/brand/${stackedLogo ? 'critical-error-neutral-stacked.svg' : `critical-error-${brandTheme(theme)}.png`}`;
   return <section className="hero" aria-labelledby="hero-title">
-    <div className="hero-art" role="img" aria-label={['dornogal', 'neutral', 'neutral-flashy', 'neutral-classic', 'blue', 'green'].includes(theme) ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
+    <div className="hero-art" role="img" aria-label={theme.startsWith('neutral') ? 'Silvermoon w Midnight, elfickie wieże i jasne kamienne tarasy pod nocnym niebem' : ['dornogal', 'blue', 'green'].includes(theme) ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
     <div className="hero-content wrap">
       <p className="eyebrow"><span className="eyebrow-line" /> WORLD OF WARCRAFT <span className="eyebrow-separator">/</span> EU BURNING LEGION</p>
       <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><span className={stackedLogo ? 'logo-art logo-animated' : 'logo-art'}>{stackedLogo ? <Logo stacked /> : <img src={logoUrl} alt="" width="1774" height="887" />}</span></h1>
