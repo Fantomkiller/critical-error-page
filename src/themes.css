@@ -13,7 +13,7 @@
 :root:is([data-theme=dornogal],[data-theme=dalaran]){--bg:#10191e;--panel:#18262d;--panel2:#25343c;--wine:#66513a;--red:#bf9860;--cream:#eae4d6;--muted:#a5b3b6;--gold:#b99d70;--line:rgba(183,163,125,.22)}
 :is([data-theme=dornogal],[data-theme=dalaran]) ::selection{background:#675842;color:#fff}
 :is([data-theme=dornogal],[data-theme=dalaran]) .site-header{background:linear-gradient(180deg,rgba(12,21,27,.95),rgba(17,29,35,.82));border-color:var(--line)}
-:is([data-theme=dornogal],[data-theme=dalaran]) .hero-art{background-image:url('/assets/hero-dornogal-surface.png');background-position:center 52%}
+:is([data-theme=dornogal],[data-theme=dalaran]) .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png');background-position:center 52%}
 :is([data-theme=dornogal],[data-theme=dalaran]) .hero-shade{background:linear-gradient(90deg,rgba(10,19,24,.92),rgba(12,22,28,.74) 25%,rgba(15,27,32,.25) 60%,rgba(15,27,32,.05)),linear-gradient(0deg,#10191e,rgba(16,25,30,.4) 17%,transparent 48%)}
 :is([data-theme=dornogal],[data-theme=dalaran]) .hero h1{color:#eee9dd;text-shadow:0 3px 22px rgba(8,17,23,.35)}
 :is([data-theme=dornogal],[data-theme=dalaran]) .hero-lead{color:#d6dcd6}
@@ -62,7 +62,7 @@
 
 /* Dalaran: chłodne srebro, przygaszony fiolet i światło arcane. */
 :root[data-theme=dalaran]{--bg:#171622;--panel:#242335;--panel2:#353348;--cream:#e9e5ed;--muted:#aaa9bf;--gold:#b9aecb;--line:rgba(187,180,212,.23)}
-[data-theme=dalaran] .hero-art{background-image:url('/assets/hero-dalaran.png')}
+[data-theme=dalaran] .hero-art{background-image:url('/assets/hero-dalaran-soft.png')}
 [data-theme=dalaran] .hero-shade{background:linear-gradient(90deg,rgba(17,17,29,.91),rgba(23,20,39,.67) 28%,rgba(29,26,49,.15) 65%),linear-gradient(0deg,#171622,rgba(23,22,34,.3) 18%,transparent 48%)}
 [data-theme=dalaran] .site-header{background:linear-gradient(180deg,rgba(19,18,32,.95),rgba(28,26,45,.86))}
 [data-theme=dalaran] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#c2b4d6}

@@ -1,6 +1,6 @@
 # Wszystkie propozycje logo i emblematów Critical Error
 
-Zapisane lokalnie w repo: **28 grafik**. Każdy zestaw ma własny README z promptami.
+Zapisane lokalnie w repo: **32 grafiki**. Każdy zestaw ma własny README z promptami.
 
 ## Pierwsze koncepcje
 
@@ -128,3 +128,23 @@ Zapisane lokalnie w repo: **28 grafik**. Każdy zestaw ma własny README z promp
 
 ![stacked-horde-medallion-v1](stacked/stacked-horde-medallion-v1.png)
 
+
+## Warianty aktywnej marki według motywu
+
+Te same litery i konstrukcja ramy, palety dopasowane do motywu. Prompty i źródła w `../theme-graphics.md`.
+
+### critical-error-citadel
+
+![critical-error-citadel](theme-variants/critical-error-citadel.png)
+
+### critical-error-dalaran
+
+![critical-error-dalaran](theme-variants/critical-error-dalaran.png)
+
+### emblem-citadel
+
+![emblem-citadel](theme-variants/emblem-citadel.png)
+
+### emblem-dalaran
+
+![emblem-dalaran](theme-variants/emblem-dalaran.png)
