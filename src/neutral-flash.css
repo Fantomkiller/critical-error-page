@@ -37,6 +37,9 @@
 :root[data-theme=neutral-flashy] :is(.intro .text-link,.live-progress .text-link):hover{color:#650000}
 
 /* Cards keep the same surface while hover adds a restrained edge. */
+:root[data-theme=neutral-flashy] .player-card:hover{border-color:#9d0000;box-shadow:inset 0 0 0 1px rgba(157,0,0,.5),inset 0 0 28px rgba(157,0,0,.15)}
+:root[data-theme=neutral-flashy] .player-card::after{inset:-50% auto -50% -45%;width:34%;background:linear-gradient(90deg,transparent,rgba(157,0,0,.35) 35%,rgba(255,255,255,.22) 50%,rgba(157,0,0,.35) 65%,transparent);transform:skewX(-22deg);opacity:0;transition:left 600ms ease,opacity var(--ui-motion);pointer-events:none}
+:root[data-theme=neutral-flashy] .player-card:hover::after{left:125%;opacity:1}
 :root[data-theme=neutral-flashy] :is(.role-card,.mythic-card){position:relative;isolation:isolate}
 :root[data-theme=neutral-flashy] .role-card,:root[data-theme=neutral-flashy] .role-card:hover{background:#3e474b}
 :root[data-theme=neutral-flashy] .mythic-card,:root[data-theme=neutral-flashy] .mythic-card:hover{background:linear-gradient(145deg,#41494c,#303b40)}
@@ -56,4 +59,4 @@
 
 @media(max-width:580px){[data-theme=neutral-flashy] .contact-grid h2{font-size:clamp(1.8rem,8vw,2.6rem)}[data-theme=neutral-flashy] .mplus-table{min-width:0}[data-theme=neutral-flashy] .mplus-table :is(th,td){padding:10px 6px}[data-theme=neutral-flashy] .mplus-rank{width:34px}[data-theme=neutral-flashy] .mplus-identity{gap:8px}[data-theme=neutral-flashy] .mplus-identity img{width:28px;height:28px}[data-theme=neutral-flashy] .mplus-identity span{max-width:135px}[data-theme=neutral-flashy] .mplus-score strong{font-size:1rem}}
 
-@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before{display:none}}
+@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before,[data-theme=neutral-flashy] .player-card::after{display:none}}
