@@ -181,7 +181,7 @@ Prompty: `../extra-theme-graphics.md`.
 
 ### Warianty z podkreśleniem, v2
 
-Na podstawie przesłanego logo: kremowe litery, czerwone przecięcie i podwójne podkreślenie. Dodatkowe pliki, bez zastępowania obecnego logo strony.
+Na podstawie przesłanego logo: kremowe litery, czerwone przecięcie i pojedyncze podkreślenie. Dodatkowe pliki, bez zastępowania obecnego logo strony.
 
 ![Dwuliniowe logo](horizontal-family/stacked-error-underline-v2.png)
 

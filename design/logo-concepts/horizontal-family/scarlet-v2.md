@@ -12,3 +12,7 @@ Edit target: attached Critical Error horizontal logo. Make exactly ONE two-line 
 
 Use attached original Critical Error logo as strict edit reference. Create ONE compact CE monogram emblem matching exactly its typography: ivory fantasy serif C and E, same fine charcoal edge and minimal subtle bevel. C on left E on right slightly interlocked but clearly readable. Preserve saturated scarlet diagonal slash as a single restrained accent crossing the join between the letters, and two slim scarlet underline strokes beneath. No shield, no frame, no extra symbols, no plaque. Same identity as original wordmark; not a new aesthetic. Flat clean restrained finish, no glow, no extra texture, no oversharpened 3D surfaces. Transparent background with actual alpha, tight useful margins, centered square composition.
 
+
+## Korekta: pojedyncze podkreślenie
+
+Wbudowany imagegen. Dla obu plików: Delete only the lower red underline stroke. Keep exactly one upper underline. Preserve typography, colors, slash, layout and transparent background.
