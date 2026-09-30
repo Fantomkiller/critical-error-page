@@ -1,5 +1,5 @@
 /* Neutral Flash: ivory text, charcoal surfaces, logo scarlet accents. */
-:root[data-theme=neutral-flashy]{--red:#9d0000;--wine:#780000;--gold:#ebe9e3;--muted:#c0c7ca;--line:rgba(192,199,202,.28);--ui-motion:200ms ease}
+:root[data-theme=neutral-flashy]{--red:#9d0000;--wine:#780000;--gold:#adb9c2;--muted:#c0c7ca;--heading-accent:#d93a3a;--silver:#adb9c2;--line:rgba(192,199,202,.28);--ui-motion:200ms ease}
 
 /* Interaction feedback changes light and edges, never position. */
 [data-theme=neutral-flashy] :is(a,button,input,select,textarea,.player-card,.mythic-card,.search-box,.availability label){transition:color var(--ui-motion),background-color var(--ui-motion),border-color var(--ui-motion),box-shadow var(--ui-motion),opacity var(--ui-motion)}
@@ -14,21 +14,26 @@
 :root[data-theme=neutral-flashy] :is(.button,.nav-join)::before{content:'';position:absolute;top:-60%;bottom:-60%;left:-55%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-22deg);transition:left 600ms ease;pointer-events:none;z-index:0}
 :root[data-theme=neutral-flashy] :is(.button,.nav-join):is(:hover,:focus-visible)::before{left:130%}
 :root[data-theme=neutral-flashy] :is(.button-ghost,.nav-join):is(:hover,:focus-visible){color:#fff;background-color:rgba(157,0,0,.17);border-color:#9d0000;box-shadow:inset 0 1px rgba(255,255,255,.08)}
+:root[data-theme=neutral-flashy] .button-ghost:is(:hover,:focus-visible){background:linear-gradient(115deg,#9d0000,#800000);color:#fff;border-color:#790000;box-shadow:inset 0 1px rgba(255,255,255,.1),0 4px 18px rgba(157,0,0,.22)}
 
-/* Labels and headings use the same readable ivory as ordinary links. */
-:root[data-theme=neutral-flashy] :is(.eyebrow,.section-topline,.roster-group-heading h3,.application-aside .dashboard-label,.contact-links .dashboard-label,.application-aside>strong,.mythic-card>span){color:#ebe9e3}
-:root[data-theme=neutral-flashy] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#ebe9e3}
+/* Scarlet headings and cool silver labels restore hierarchy on dark panels. */
+:root[data-theme=neutral-flashy] :is(.eyebrow,.section-topline,.roster-group-heading h3,.application-aside .dashboard-label,.contact-links .dashboard-label,.application-aside>strong,.mythic-card>span){color:var(--silver)}
+:root[data-theme=neutral-flashy] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:var(--heading-accent)}
+:root[data-theme=neutral-flashy] .contact-grid h2 em{color:#9fb7c5}
 :root[data-theme=neutral-flashy] :is(.application-aside .text-link,.roster-footer .text-link,.mythic-card a,.mplus-source a,.profile-links a,.contact-hint a,.contact-links>a){color:#ebe9e3}
 :root[data-theme=neutral-flashy] :is(.text-link,.mythic-card a,.mplus-source a,.profile-links a,.contact-hint a,.contact-links>a,.site-nav a):hover{color:#fff;border-color:#9d0000}
 :root[data-theme=neutral-flashy] :is(.application-aside p,.application-aside li,.role-card small,.form-submit p,.form-grid label small,.field-optional,.counter,.player-identity small,.player-stat small,.mplus-identity small,.mplus-score small,.roster-status,.mythic-card p,.footer-bottom,.legal-note){color:#c0c7ca}
 :root[data-theme=neutral-flashy] .application-form input::placeholder,:root[data-theme=neutral-flashy] .application-form textarea::placeholder,:root[data-theme=neutral-flashy] .search-box input::placeholder{color:#b8c0c3;opacity:1}
 :root[data-theme=neutral-flashy] :is(.player-stat strong,.mplus-score strong,.filter.active,.filter.active span){color:#ebe9e3}
-:root[data-theme=neutral-flashy] :is(.player-name,.form-step>span,.search-icon){color:#ebe9e3}
+:root[data-theme=neutral-flashy] .player-name{color:var(--class-color,#ebe9e3)}
+:root[data-theme=neutral-flashy] :is(.form-step>span,.search-icon){color:var(--silver)}
 :root[data-theme=neutral-flashy] :is(.roster-group-heading span,.hero-bottom,.brand-name small){color:#c0c7ca}
-:root[data-theme=neutral-flashy] .brand-name>span{color:#ebe9e3}
+:root[data-theme=neutral-flashy] .brand-name>span{color:var(--heading-accent)}
 
 /* Light sections retain dark text; red has enough contrast on ivory. */
 :root[data-theme=neutral-flashy] :is(.intro h2 em,.progress-heading h2 em,.intro .dark-eyebrow,.progress-section .dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.intro .text-link,.live-progress .text-link){color:#8f1111}
+:root[data-theme=neutral-flashy] :is(.intro,.progress-section) .section-topline{color:#465053;border-color:rgba(59,67,69,.28)}
+:root[data-theme=neutral-flashy] :is(.intro,.progress-section) .eyebrow{color:#8f1111}
 :root[data-theme=neutral-flashy] :is(.intro .text-link,.live-progress .text-link):hover{color:#650000}
 
 /* Cards keep the same surface while hover adds a restrained edge. */
