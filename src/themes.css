@@ -187,8 +187,19 @@
 [data-theme=neutral] .menu-toggle,[data-theme=neutral] .site-nav.open{background:#303a3f}
 
 
-[data-theme=neutral] .hero-art{filter:saturate(.35)}
+[data-theme=neutral] .hero-art{filter:saturate(.65)}
 [data-theme=blue] .hero-art{filter:saturate(.6)}
 [data-theme=green] .hero-art{filter:saturate(.75)}
 [data-theme=neutral] .hero-logo img{height:100px;object-fit:cover}
 @media(max-width:580px){[data-theme=neutral] .hero-logo img{height:70px}}
+
+/* Czerwień znaku jest akcentem na neutralnej bazie. */
+:root[data-theme=neutral]{--red:#bc4851;--wine:#81313a;--gold:#cf9396;--line:rgba(204,174,176,.22)}
+[data-theme=neutral] :is(.brand-name>span,.title-stop,.brand-slash,.number-accent){color:#d47880}
+[data-theme=neutral] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#d99a9e}
+[data-theme=neutral] .button-primary{background:#a7343f;border-color:#be505b;color:#fff4ef}
+[data-theme=neutral] .button-primary:hover{background:#bc414d}
+[data-theme=neutral] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord,.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#933d46}
+[data-theme=neutral] .filter.active::after{background:#c65b65}
+[data-theme=neutral] .role-card.selected{background:#573239;border-color:#c2767d}
+[data-theme=neutral] .availability input{accent-color:#b9434f}

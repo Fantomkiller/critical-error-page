@@ -1,6 +1,6 @@
 # Wszystkie propozycje logo i emblematów Critical Error
 
-Zapisane lokalnie w repo: **38 grafik**. Każdy zestaw ma własny README z promptami.
+Zapisane lokalnie w repo: **44 grafiki**. Każdy zestaw ma własny README z promptami.
 
 ## Pierwsze koncepcje
 
@@ -176,3 +176,31 @@ Prompty: `../extra-theme-graphics.md`.
 ### emblem-green
 
 ![emblem-green](theme-variants/emblem-green.png)
+
+## Rodzina oryginalnego horizontal-error-v1 i dopasowane emblematy
+
+Aktywne logo neutralne to oryginalny `horizontal/horizontal-error-v1.png`, nie szara przymiarka pokazana wyżej. Aktywne logo niebieskie: `stacked/stacked-dalaran-blue-v1.png`; zielone: `extra/undercity-apothecary-v1.png`.
+
+### emblem-blue
+
+![emblem-blue](horizontal-family/emblem-blue.png)
+
+### emblem-green
+
+![emblem-green](horizontal-family/emblem-green.png)
+
+### emblem-neutral
+
+![emblem-neutral](horizontal-family/emblem-neutral.png)
+
+### horizontal-error-underline-v1
+
+![horizontal-error-underline-v1](horizontal-family/horizontal-error-underline-v1.png)
+
+### stacked-error-brackets-v1
+
+![stacked-error-brackets-v1](horizontal-family/stacked-error-brackets-v1.png)
+
+### stacked-error-v1
+
+![stacked-error-v1](horizontal-family/stacked-error-v1.png)
