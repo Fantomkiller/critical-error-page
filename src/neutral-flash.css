@@ -19,7 +19,7 @@
 [data-theme=neutral-flashy] .logo-animated{position:relative;isolation:isolate}
 /* A small reflection follows the red slash itself, without touching the letters. */
 [data-theme=neutral-flashy] .logo-slash-glint{stroke-dasharray:.08 2;stroke-dashoffset:.08}
-[data-theme=neutral-flashy] .logo-animated:is(:hover,:focus-visible) .logo-slash-glint{animation:logo-slash-glint 1600ms linear}
+[data-theme=neutral-flashy] .logo-animated:is(:hover,:focus-visible) .logo-slash-glint{animation:logo-slash-glint 700ms linear}
 @keyframes logo-slash-glint{from{stroke-dashoffset:.08}to{stroke-dashoffset:-1.08}}
 @media(max-width:1100px){[data-theme=neutral-flashy] .nav-shell .brand-wordmark{width:190px;height:38px}}
 @media(max-width:800px){:root[data-theme=neutral-flashy] .hero h1.hero-logo{width:min(430px,75vw)}}
