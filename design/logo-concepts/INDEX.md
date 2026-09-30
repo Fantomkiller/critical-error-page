@@ -179,6 +179,16 @@ Prompty: `../extra-theme-graphics.md`.
 
 ## Rodzina oryginalnego horizontal-error-v1 i dopasowane emblematy
 
+### Warianty z podkreśleniem, v2
+
+Na podstawie przesłanego logo: kremowe litery, czerwone przecięcie i podwójne podkreślenie. Dodatkowe pliki, bez zastępowania obecnego logo strony.
+
+![Dwuliniowe logo](horizontal-family/stacked-error-underline-v2.png)
+
+![Emblem CE](horizontal-family/emblem-error-underline-v2.png)
+
+Prompty i źródło: [scarlet-v2.md](horizontal-family/scarlet-v2.md).
+
 Aktywne logo neutralne to oryginalny `horizontal/horizontal-error-v1.png`, nie szara przymiarka pokazana wyżej. Aktywne logo niebieskie: `stacked/stacked-dalaran-blue-v1.png`; zielone: `extra/undercity-apothecary-v1.png`.
 
 ### emblem-blue
