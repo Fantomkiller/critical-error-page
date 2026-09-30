@@ -4,6 +4,7 @@ import { fallbackProgress, fallbackRoster } from './data/liveSnapshot.js';
 import Recruitment from './Recruitment.jsx';
 import { MythicPlus, Contact } from './Sections.jsx';
 import './style.css';
+import './themes.css';
 
 const links = {
   discord: 'https://discord.gg/SeJ8mTBdGX',
@@ -26,16 +27,17 @@ function External({ href, children, ...props }) {
 
 function Brand() {
   return <a className="brand" href="#top" aria-label="Critical Error, strona główna">
-    <span className="brand-mark" aria-hidden="true">CE<span className="brand-slash">/</span></span>
+    <img className="brand-emblem" src={`${import.meta.env.BASE_URL}assets/brand/emblem-dornogal.png`} alt="" width="52" height="52" />
     <span className="brand-name">CRITICAL <span>ERROR</span><small>EU · BURNING LEGION</small></span>
   </a>;
 }
 
-function Header() {
+function Header({ theme, onThemeChange }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
   return <header className="site-header" id="top"><div className="nav-shell wrap">
     <Brand />
+    <label className="theme-picker"><span className="sr-only">Wygląd strony</span><select value={theme} onChange={(event) => onThemeChange(event.target.value)}><option value="dornogal">Dornogal</option><option value="dalaran">Dalaran</option><option value="citadel">Cytadela</option></select></label>
     <button className="menu-toggle" type="button" aria-label={open ? 'Zamknij menu' : 'Otwórz menu'} aria-controls="site-nav" aria-expanded={open} onClick={() => setOpen(!open)}><span /><span /><span /></button>
     <nav id="site-nav" className={`site-nav ${open ? 'open' : ''}`} aria-label="Nawigacja główna" onClick={close}>
       <a href="#o-nas">Gildia</a><a href="#roster">Załoga</a><a href="#rekrutacja">Rekrutacja</a><a href="#mythic">Mythic+</a><a href="#raid">Raid</a><a className="nav-join" href="#kontakt">Kontakt <span aria-hidden="true">↗</span></a>
@@ -43,12 +45,12 @@ function Header() {
   </div></header>;
 }
 
-function Hero() {
+function Hero({ theme }) {
   return <section className="hero" aria-labelledby="hero-title">
-    <div className="hero-art" role="img" aria-label="Mroczna cytadela pod burgundowym burzowym niebem" /><div className="hero-shade" />
+    <div className="hero-art" role="img" aria-label={theme === 'dornogal' ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
     <div className="hero-content wrap">
       <p className="eyebrow"><span className="eyebrow-line" /> WORLD OF WARCRAFT <span className="eyebrow-separator">/</span> EU BURNING LEGION</p>
-      <h1 id="hero-title">CRITICAL<br /><em>ERROR</em><span className="title-stop">.</span></h1>
+      <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><img src={`${import.meta.env.BASE_URL}assets/brand/critical-error-dornogal.png`} alt="" width="1774" height="887" /></h1>
       <p className="hero-lead">Semi-hardcore. Regularny progres. Cel: <strong>Cutting Edge.</strong> Dołącz do składu, który chce sięgać wyżej.</p>
       <div className="hero-actions"><a className="button button-primary" href="#rekrutacja">Zgłoś się do gildii <span aria-hidden="true">↗</span></a><a className="button button-ghost" href="#roster">Poznaj nasz skład <span aria-hidden="true">↗</span></a></div>
     </div>
@@ -129,6 +131,8 @@ function Progress() {
 }
 
 function App() {
+  const [theme, setTheme] = useState(() => { try { const saved = localStorage.getItem('critical-error-theme'); return ['dornogal', 'dalaran', 'citadel'].includes(saved) ? saved : 'dornogal'; } catch { return 'dornogal'; } });
+  useEffect(() => { document.documentElement.dataset.theme = theme; try { localStorage.setItem('critical-error-theme', theme); } catch {} }, [theme]);
   const [config, setConfig] = useState({ ready: false });
   const { players, loading: rosterLoading } = useRoster(config);
   const counts = useMemo(() => Object.fromEntries(Object.keys(roleNames).map((key) => [key, players.filter((p) => p.role === key).length])), [players]);
@@ -144,8 +148,8 @@ function App() {
   }, []);
   const applicationEndpoint = config.applicationEndpoint === '/api/apply' || (typeof config.applicationEndpoint === 'string' && typeof config.rosterApiUrl === 'string' && (() => { try { const application = new URL(config.applicationEndpoint); const roster = new URL(config.rosterApiUrl); return application.protocol === 'https:' && application.pathname === '/api/apply' && roster.pathname === '/api/roster' && application.origin === roster.origin; } catch { return false; } })()) ? config.applicationEndpoint : null;
   return <>
-    <a className="skip-link" href="#main">Przejdź do treści</a><Header />
-    <main id="main"><Hero />
+    <a className="skip-link" href="#main">Przejdź do treści</a><Header theme={theme} onThemeChange={setTheme} />
+    <main id="main"><Hero theme={theme} />
       <section className="numbers" aria-label="Skład głównej drużyny"><div className="wrap numbers-grid"><div className="number-lead"><span className="micro-label">DRUŻYNA MAIN</span><strong>Jeden skład.<br />Wiele ról.</strong></div><div className="number"><strong>{players.length}</strong><span>postaci w rosterze</span></div><div className="number"><strong>{counts.tank}<span className="number-accent"> / </span>{counts.heal}</strong><span>tanków / healerów</span></div><div className="number"><strong>{counts.melee + counts.ranged}</strong><span>postaci DPS</span></div></div></section>
       <section className="intro section-pad" id="o-nas" aria-labelledby="about-title"><div className="wrap intro-grid reveal"><div className="section-heading"><p className="eyebrow dark-eyebrow"><span className="eyebrow-line" /> KIM JESTEŚMY</p><h2 id="about-title">NAJLEPSZE<br />PULLE ROBI SIĘ<br /><em>RAZEM.</em></h2></div><div className="intro-copy"><p className="large-copy">Critical Error to gildia semi-hardcore na EU Burning Legion. Regularnie raidujemy, wspólnie robimy klucze M+ i budujemy skład z ambicją na Cutting Edge.</p><a className="text-link" href="#roster">Zobacz wszystkich graczy <span aria-hidden="true">↗</span></a></div></div></section>
       <Roster players={players} loading={rosterLoading} /><Recruitment endpoint={applicationEndpoint} /><MythicPlus players={players} apiUrl={config.rosterApiUrl?.replace(/\/api\/roster$/, '/api/mplus')} configReady={config.ready} assetsBase={import.meta.env.BASE_URL} /><Progress /><Contact />

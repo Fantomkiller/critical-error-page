@@ -1,0 +1,91 @@
+/* Oba warianty korzystają z tego samego układu i treści. */
+.theme-picker{display:flex;gap:2px;padding:3px;border:1px solid var(--line);flex:none}
+.theme-picker button{border:0;background:transparent;color:var(--muted);padding:6px 9px;font-size:10px;font-weight:700;letter-spacing:.04em}
+.theme-picker button[aria-pressed=true]{background:var(--panel2);color:var(--cream)}
+.nav-shell{gap:20px}.site-nav{margin-left:auto}
+.theme-picker select{background:var(--panel);border:0;color:var(--cream);padding:6px 8px;font:600 11px var(--sans);max-width:110px;cursor:pointer;color-scheme:dark}
+.brand-emblem{width:52px;height:52px;object-fit:contain;flex:none}
+.hero h1.hero-logo{width:min(650px,55vw);margin:22px 0 24px;line-height:0;text-shadow:none}
+.hero-logo img{display:block;width:100%;height:auto;filter:none}
+@media(max-width:800px){.hero h1.hero-logo{width:min(560px,85vw)}.brand-emblem{width:42px;height:42px}}
+@media(max-width:580px){.hero h1.hero-logo{width:100%;max-width:390px;margin:24px 0}.brand-emblem{width:36px;height:36px}.hero-lead{max-width:350px}}
+
+:root:is([data-theme=dornogal],[data-theme=dalaran]){--bg:#10191e;--panel:#18262d;--panel2:#25343c;--wine:#66513a;--red:#bf9860;--cream:#eae4d6;--muted:#a5b3b6;--gold:#b99d70;--line:rgba(183,163,125,.22)}
+:is([data-theme=dornogal],[data-theme=dalaran]) ::selection{background:#675842;color:#fff}
+:is([data-theme=dornogal],[data-theme=dalaran]) .site-header{background:linear-gradient(180deg,rgba(12,21,27,.95),rgba(17,29,35,.82));border-color:var(--line)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .hero-art{background-image:url('/assets/hero-dornogal-surface.png');background-position:center 52%}
+:is([data-theme=dornogal],[data-theme=dalaran]) .hero-shade{background:linear-gradient(90deg,rgba(10,19,24,.92),rgba(12,22,28,.74) 25%,rgba(15,27,32,.25) 60%,rgba(15,27,32,.05)),linear-gradient(0deg,#10191e,rgba(16,25,30,.4) 17%,transparent 48%)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .hero h1{color:#eee9dd;text-shadow:0 3px 22px rgba(8,17,23,.35)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .hero-lead{color:#d6dcd6}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3){color:#c6b18c}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.title-stop,.brand-slash,.number-accent){color:#b59360}
+:is([data-theme=dornogal],[data-theme=dalaran]) .button-primary{background:#b89a68;border-color:#c3a77a;color:#17232a}
+:is([data-theme=dornogal],[data-theme=dalaran]) .button-primary:hover{background:#ceb382}
+:is([data-theme=dornogal],[data-theme=dalaran]) .button-ghost{background:rgba(18,32,39,.55);border-color:rgba(214,211,191,.45)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .button-ghost:hover{background:#263c47}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.numbers,.site-footer){background:#142127}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.number span:last-child,.footer-top p,.footer-bottom,.legal-note){color:#9bafb5}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.intro,.progress-section){background:#dfded3;color:#24343a}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#696147}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.intro-copy p,.progress-heading>p){color:#566467}
+:is([data-theme=dornogal],[data-theme=dalaran]) .intro-copy .large-copy{color:#2c3c42}
+:is([data-theme=dornogal],[data-theme=dalaran]) .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(74,109,120,.16),transparent 45%),#101b21}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.roster-heading>p,.mythic-layout>p,.mplus-leaderboard-head>p,.role-hint,.roster-status){color:#a6b6ba}
+:is([data-theme=dornogal],[data-theme=dalaran]) .section-topline{color:#a6a991}
+:is([data-theme=dornogal],[data-theme=dalaran]) .player-card{background:linear-gradient(115deg,#20313b,#19282f);border-color:rgba(163,182,187,.17)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .player-card:hover{background:#293d46}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.player-identity small,.player-stat small,.mplus-identity small,.filter,.search-box input::placeholder){color:#9aadb4}
+:is([data-theme=dornogal],[data-theme=dalaran]) .filter.active::after{background:#bca478}
+:is([data-theme=dornogal],[data-theme=dalaran]) .application-section{background:#17262e}
+:is([data-theme=dornogal],[data-theme=dalaran]) .application-form{background:linear-gradient(145deg,#21343e,#192830);box-shadow:none}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.application-aside,.role-card,.availability label,.form-result){background:#24363f}
+:is([data-theme=dornogal],[data-theme=dalaran]) .role-card.selected{background:#45544d;border-color:#bba77d}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#121f27;color:#e8e6db}
+:is([data-theme=dornogal],[data-theme=dalaran]) .application-form select option{background:#17262e}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.application-intro>p:last-child,.application-aside p,.application-aside li,.form-submit p,.contact-hint,.form-grid label small,.profile-links small,.field-optional,.counter){color:#adbdc0}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.form-grid label,.application-form label.form-full,.profile-links label,.availability legend){color:#d0d8d5}
+:is([data-theme=dornogal],[data-theme=dalaran]) .availability input{accent-color:#b69e72}
+:is([data-theme=dornogal],[data-theme=dalaran]) .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(74,114,121,.2),transparent 45%),#122127}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#263a42,#1b2c34);border-color:var(--line)}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.mplus-table th,.mplus-rank,.mplus-source,.mythic-card p){color:#a8b7b9}
+:is([data-theme=dornogal],[data-theme=dalaran]) .mplus-leader:hover td{background:rgba(163,183,172,.08)}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.raid-schedule,.live-progress){background:#ecebe1;border-color:rgba(44,65,70,.18)}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#6d6247}
+:is([data-theme=dornogal],[data-theme=dalaran]) :is(.raid-schedule p,.live-progress p,.progress-modes span,.live-indicator){color:#617074}
+:is([data-theme=dornogal],[data-theme=dalaran]) .contact-section{background:#243941;border-color:var(--line)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .contact-grid p:not(.eyebrow){color:#c1d0d0}
+:is([data-theme=dornogal],[data-theme=dalaran]) .stat-skeleton{background-image:linear-gradient(100deg,#344d58 20%,#617e84 48%,#344d58 76%)}
+:is([data-theme=dornogal],[data-theme=dalaran]) .menu-toggle,:is([data-theme=dornogal],[data-theme=dalaran]) .site-nav.open{background:#192b34}
+@media(max-width:1100px){.theme-picker button{padding:6px}.nav-shell{gap:12px}.brand-name{font-size:14px}.site-nav{gap:10px;font-size:10px}}
+@media(max-width:800px){.theme-picker{margin-left:auto}.site-nav{font-size:13px}.nav-shell{gap:13px}}
+@media(max-width:420px){.brand-name{font-size:12px}.brand-name small{font-size:7px;letter-spacing:.15em}.brand{gap:7px}.brand-mark{width:32px;flex-basis:32px}.theme-picker button{font-size:9px;padding:5px}.nav-shell{gap:7px}.menu-toggle{width:36px;flex:none}}
+
+/* Dalaran: chłodne srebro, przygaszony fiolet i światło arcane. */
+:root[data-theme=dalaran]{--bg:#171622;--panel:#242335;--panel2:#353348;--cream:#e9e5ed;--muted:#aaa9bf;--gold:#b9aecb;--line:rgba(187,180,212,.23)}
+[data-theme=dalaran] .hero-art{background-image:url('/assets/hero-dalaran.png')}
+[data-theme=dalaran] .hero-shade{background:linear-gradient(90deg,rgba(17,17,29,.91),rgba(23,20,39,.67) 28%,rgba(29,26,49,.15) 65%),linear-gradient(0deg,#171622,rgba(23,22,34,.3) 18%,transparent 48%)}
+[data-theme=dalaran] .site-header{background:linear-gradient(180deg,rgba(19,18,32,.95),rgba(28,26,45,.86))}
+[data-theme=dalaran] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#c2b4d6}
+[data-theme=dalaran] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#beb0d3}
+[data-theme=dalaran] :is(.title-stop,.brand-slash,.number-accent){color:#a58abd}
+[data-theme=dalaran] .button-primary{background:#a899be;border-color:#c0b2d2;color:#221e32}
+[data-theme=dalaran] .button-primary:hover{background:#c0b2d2}
+[data-theme=dalaran] :is(.numbers,.site-footer){background:#1d1d2d}
+[data-theme=dalaran] :is(.intro,.progress-section){background:#dedce6;color:#343247}
+[data-theme=dalaran] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#776189}
+[data-theme=dalaran] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(100,87,147,.2),transparent 45%),#191925}
+[data-theme=dalaran] .player-card{background:linear-gradient(115deg,#2e2d42,#242436)}
+[data-theme=dalaran] .player-card:hover{background:#38354f}
+[data-theme=dalaran] .application-section{background:#222131}
+[data-theme=dalaran] .application-form{background:linear-gradient(145deg,#302d44,#252436)}
+[data-theme=dalaran] :is(.application-aside,.role-card,.availability label,.form-result){background:#343148}
+[data-theme=dalaran] .role-card.selected{background:#504663;border-color:#b9a6d0}
+[data-theme=dalaran] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#1b1b2a}
+[data-theme=dalaran] .application-form select option{background:#222131}
+[data-theme=dalaran] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(117,83,147,.19),transparent 45%),#1c1b2a}
+[data-theme=dalaran] :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#343048,#252638)}
+[data-theme=dalaran] :is(.raid-schedule,.live-progress){background:#ece9f1}
+[data-theme=dalaran] :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#746087}
+[data-theme=dalaran] .contact-section{background:#343048}
+[data-theme=dalaran] .stat-skeleton{background-image:linear-gradient(100deg,#49405e 20%,#7e7295 48%,#49405e 76%)}
+[data-theme=dalaran] .menu-toggle,[data-theme=dalaran] .site-nav.open{background:#282639}
