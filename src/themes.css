@@ -287,3 +287,16 @@
 [data-theme=neutral-classic] .nav-join{border-color:rgba(188,188,178,.5)}
 [data-theme=neutral-classic] :is(a,button,input,select,textarea):focus-visible{outline-color:#c2767d}
 [data-theme=neutral-classic] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea):focus{border-color:#c2767d;box-shadow:0 0 0 2px rgba(188,72,81,.15)}
+
+/* Calm neutral buttons and a stable roster background during hover. */
+[data-theme=neutral] .button-primary{background:#8f2626;border-color:#873333;box-shadow:none}
+[data-theme=neutral] .button-primary:hover{background:#9d2b2b;border-color:#943838;box-shadow:none}
+[data-theme^=neutral] .player-card,[data-theme^=neutral] .player-card:hover{background:linear-gradient(115deg,#343d42,#293236);transition:border-color .2s,box-shadow .2s}
+[data-theme^=neutral] .player-card::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.055);opacity:0;transition:opacity .2s;pointer-events:none}
+[data-theme^=neutral] .player-card:hover::after{opacity:1}
+
+/* Custom arrow keeps the native select menu with consistent inner spacing. */
+:root[data-theme] :is(.application-form,.theme-picker) select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m3 6 5 5 5-5' fill='none' stroke='%23ebe9e3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;background-size:16px;padding-right:48px}
+:root[data-theme] .theme-picker select{background-position:right 10px center;background-size:13px;padding-right:30px;max-width:160px}
+@media(prefers-reduced-motion:reduce){[data-theme^=neutral] .player-card::after{transition:none}}
+@media(max-width:580px){.nav-shell{gap:8px}.brand{gap:8px}.brand-name{font-size:12px}:root[data-theme] .theme-picker select{max-width:112px;font-size:10px;padding-left:6px;padding-right:25px;background-position:right 8px center}}
