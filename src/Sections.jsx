@@ -37,7 +37,7 @@ export function MythicPlus({ players, apiUrl, configReady, assetsBase = '/' }) {
     </div>
     <div className="mythic-cards">
       <div className="mythic-card"><span>01 / GRAMY RAZEM</span><h3>Łapiemy się na klucze</h3><p>Chcesz iść na M+? Odezwij się na Discordzie lub w grze. Nie mamy stałego grafiku kluczy.</p><a href={discord} target="_blank" rel="noopener noreferrer">Wejdź na Discord ↗</a></div>
-      <div className="mythic-card"><span>02 / WYSOKIE KLUCZE</span><h3>Lubimy wyzwania</h3><p>Część z nas gra wysokie klucze także poza raidami.</p><a href={rio} target="_blank" rel="noopener noreferrer">Cała gildia w Raider.IO ↗</a></div>
+      <div className="mythic-card"><span>02 / WYSOKIE KLUCZE</span><h3>Lubimy wyzwania</h3><p>Osoby grające wysokie klucze również znajdą swoje miejsce.</p><a href={rio} target="_blank" rel="noopener noreferrer">Cała gildia w Raider.IO ↗</a></div>
       <div className="mythic-card"><span>03 / EKIPA</span><h3>Z kim gramy?</h3><p>Zobacz nasz skład, klasy i role. Może spotkamy się na kluczu.</p><a href="#roster">Poznaj naszą drużynę ↗</a></div>
     </div>
   </div></section>;
