@@ -158,8 +158,8 @@
 
 /* neutral */
 :root[data-theme^=neutral]{--bg:#191d20;--panel:#282e32;--panel2:#3c4348;--cream:#ebe9e3;--muted:#b0b7b9;--gold:#bcbcb2;--line:rgba(188,188,178,.23)}
-[data-theme^=neutral] .hero-art{background-image:url('/assets/hero-silvermoon-midnight.jpg');background-position:60% 50%}
-[data-theme^=neutral] .hero-shade{background:linear-gradient(90deg,rgba(20,24,26,.91),rgba(29,35,37,.67) 28%,rgba(36,43,45,.15) 65%),linear-gradient(0deg,#191d20,rgba(23,22,34,.3) 18%,transparent 48%)}
+[data-theme^=neutral] .hero-art{background-image:url('/assets/hero-silvermoon-light.jpg');background-position:50% 42%}
+[data-theme^=neutral] .hero-shade{background:linear-gradient(90deg,rgba(20,24,26,.91),rgba(29,35,37,.67) 28%,rgba(36,43,45,.32) 42%,rgba(36,43,45,.06) 52%,rgba(36,43,45,.04)),linear-gradient(0deg,#191d20,rgba(23,22,34,.3) 18%,transparent 48%)}
 [data-theme^=neutral] .site-header{background:linear-gradient(180deg,rgba(20,24,26,.95),rgba(29,35,37,.86))}
 [data-theme^=neutral] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#c7c4b8}
 [data-theme^=neutral] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#c9c5b8}
