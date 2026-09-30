@@ -165,9 +165,7 @@
 [data-theme^=neutral] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#c9c5b8}
 [data-theme^=neutral] :is(.title-stop,.brand-slash,.number-accent){color:#9e9d90}
 [data-theme^=neutral] .button-primary{background:#b3b0a1;border-color:#d0cdc0;color:#242a2b}
-[data-theme^=neutral] .button-primary:hover{background:#d0cdc0}
-[data-theme^=neutral] :is(.numbers,.site-footer){background:#22282b}
-[data-theme^=neutral] :is(.intro,.progress-section){background:#e4e3dc;color:#3b4345}
+[data-theme^=neutral] .button-primary:hover{background:linear-gradient(125deg,#ae1212,#980000 58%,#780000);color:#3b4345}
 [data-theme^=neutral] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#74776c}
 [data-theme^=neutral] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(104,112,116,.2),transparent 45%),#1d2528}
 [data-theme^=neutral] .player-card{background:linear-gradient(115deg,#343d42,#293236)}
@@ -199,7 +197,7 @@
 [data-theme^=neutral] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#b51212}
 [data-theme^=neutral] .button-primary{background:linear-gradient(125deg,#b51212,#9d0000 58%,#710909);border-color:#790000;color:#fff4ef;box-shadow:inset 0 1px rgba(157,0,0,.18),0 5px 18px rgba(157,0,0,.12)}
 [data-theme^=neutral] .button{transition:background .2s,transform .2s,border-color .2s,box-shadow .2s}
-[data-theme^=neutral] .button-primary:hover{background:linear-gradient(125deg,#8c0000,#790000 58%,#650000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.3),0 5px 24px rgba(157,0,0,.25)}
+[data-theme^=neutral] .button-primary:hover{background:linear-gradient(125deg,#ae1212,#980000 58%,#780000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.3),0 5px 24px rgba(157,0,0,.25)}
 [data-theme^=neutral] :is(.button-ghost,.nav-join):hover{background:linear-gradient(125deg,rgba(157,0,0,.18),rgba(157,0,0,.06));border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.12)}
 [data-theme^=neutral] :is(.site-nav a,.contact-links>a,.text-link):hover{color:var(--accent-red)}
 [data-theme^=neutral] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord,.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#9d1717}
@@ -221,7 +219,7 @@
 [data-theme=neutral-flashy] .site-header{border-bottom-color:rgba(211,34,34,.5);box-shadow:0 3px 22px rgba(157,0,0,.1)}
 [data-theme=neutral-flashy] :is(.button,.nav-join){position:relative;isolation:isolate;overflow:hidden}
 [data-theme=neutral-flashy] .button-primary{background:linear-gradient(115deg,#b51212,#ad0b0b 48%,#780000);border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.35),0 6px 25px rgba(157,0,0,.32)}
-[data-theme=neutral-flashy] .button-primary:hover{background:linear-gradient(115deg,#9d0000,#800000 48%,#650000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.6),0 8px 32px rgba(190,10,10,.48)}
+[data-theme=neutral-flashy] .button-primary:hover{background:linear-gradient(115deg,#bb1717,#a30909 48%,#800000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.6),0 8px 32px rgba(190,10,10,.48)}
 [data-theme=neutral-flashy] :is(.button,.nav-join)::before{content:'';position:absolute;inset:-60% auto -60% -60%;width:30%;background:linear-gradient(90deg,transparent,rgba(157,0,0,.3),transparent);transform:skewX(-22deg);transition:left .55s ease;pointer-events:none;z-index:-1}
 [data-theme=neutral-flashy] :is(.button,.nav-join):hover::before{left:140%}
 [data-theme=neutral-flashy] :is(.button-ghost,.nav-join):hover{background:linear-gradient(120deg,rgba(196,14,14,.34),rgba(157,0,0,.12));box-shadow:inset 0 1px rgba(157,0,0,.25),0 4px 22px rgba(157,0,0,.24);border-color:#790000}
@@ -239,3 +237,53 @@
 
 [data-theme^=neutral] .nav-join{color:var(--cream);border-color:rgba(157,0,0,.65)}
 [data-theme^=neutral] ::selection{background:#9d0000;color:#fff4ef}
+
+/* Original muted red neutral palette, retained as a separate option. */
+:root[data-theme=neutral-classic]{--bg:#191d20;--panel:#282e32;--panel2:#3c4348;--cream:#ebe9e3;--muted:#b0b7b9;--gold:#bcbcb2;--line:rgba(188,188,178,.23)}
+[data-theme=neutral-classic] .hero-art{background-image:url('/assets/hero-dornogal-surface-soft.png')}
+[data-theme=neutral-classic] .hero-shade{background:linear-gradient(90deg,rgba(20,24,26,.91),rgba(29,35,37,.67) 28%,rgba(36,43,45,.15) 65%),linear-gradient(0deg,#191d20,rgba(23,22,34,.3) 18%,transparent 48%)}
+[data-theme=neutral-classic] .site-header{background:linear-gradient(180deg,rgba(20,24,26,.95),rgba(29,35,37,.86))}
+[data-theme=neutral-classic] :is(.eyebrow,.brand-name>span,.brand-mark,.hero-bottom,.roster-group-heading h3,.section-topline){color:#c7c4b8}
+[data-theme=neutral-classic] :is(h1 em,h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#c9c5b8}
+[data-theme=neutral-classic] :is(.title-stop,.brand-slash,.number-accent){color:#9e9d90}
+[data-theme=neutral-classic] .button-primary{background:#b3b0a1;border-color:#d0cdc0;color:#242a2b}
+[data-theme=neutral-classic] .button-primary:hover{background:#d0cdc0}
+[data-theme=neutral-classic] :is(.numbers,.site-footer){background:#22282b}
+[data-theme=neutral-classic] :is(.intro,.progress-section){background:#e4e3dc;color:#3b4345}
+[data-theme=neutral-classic] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord){color:#74776c}
+[data-theme=neutral-classic] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(104,112,116,.2),transparent 45%),#1d2528}
+[data-theme=neutral-classic] .player-card{background:linear-gradient(115deg,#343d42,#293236)}
+[data-theme=neutral-classic] .player-card:hover{background:#454f54}
+[data-theme=neutral-classic] .application-section{background:#252d31}
+[data-theme=neutral-classic] .application-form{background:linear-gradient(145deg,#384147,#2d363a)}
+[data-theme=neutral-classic] :is(.application-aside,.role-card,.availability label,.form-result){background:#3e474b}
+[data-theme=neutral-classic] .role-card.selected{background:#5b625e;border-color:#c0c0af}
+[data-theme=neutral-classic] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea,.form-result textarea){background:#1e2629}
+[data-theme=neutral-classic] .application-form select option{background:#252d31}
+[data-theme=neutral-classic] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(111,116,113,.19),transparent 45%),#242c2f}
+[data-theme=neutral-classic] :is(.mplus-leaderboard,.mythic-card){background:linear-gradient(145deg,#41494c,#303b40)}
+[data-theme=neutral-classic] :is(.raid-schedule,.live-progress){background:#eeeDE7}
+[data-theme=neutral-classic] :is(.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#74796c}
+[data-theme=neutral-classic] .contact-section{background:#41494c}
+[data-theme=neutral-classic] .stat-skeleton{background-image:linear-gradient(100deg,#4c585a 20%,#859291 48%,#4c585a 76%)}
+[data-theme=neutral-classic] .menu-toggle,[data-theme=neutral-classic] .site-nav.open{background:#303a3f}
+[data-theme=neutral-classic] .hero-art{filter:saturate(.65)}
+[data-theme=neutral-classic] .hero-logo img{height:100px;object-fit:cover}
+@media(max-width:580px){[data-theme=neutral-classic] .hero-logo img{height:70px}}
+:root[data-theme=neutral-classic]{--red:#bc4851;--wine:#81313a;--gold:#cf9396;--line:rgba(204,174,176,.22)}
+[data-theme=neutral-classic] :is(.brand-name>span,.title-stop,.brand-slash,.number-accent){color:#d47880}
+[data-theme=neutral-classic] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#d99a9e}
+[data-theme=neutral-classic] .button-primary{background:#a7343f;border-color:#be505b;color:#fff4ef}
+[data-theme=neutral-classic] .button-primary:hover{background:#bc414d}
+[data-theme=neutral-classic] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord,.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#933d46}
+[data-theme=neutral-classic] .filter.active::after{background:#c65b65}
+[data-theme=neutral-classic] .role-card.selected{background:#573239;border-color:#c2767d}
+[data-theme=neutral-classic] .availability input{accent-color:#b9434f}
+[data-theme=neutral-classic] .button-primary{box-shadow:none}
+[data-theme=neutral-classic] .button-primary:hover{box-shadow:none}
+[data-theme=neutral-classic] :is(.button-ghost,.nav-join):hover{background:rgba(69,79,84,.75);border-color:#c2767d;box-shadow:none}
+[data-theme=neutral-classic] :is(.site-nav a,.contact-links>a,.text-link):hover{color:#d99a9e}
+[data-theme=neutral-classic] :is(.intro,.progress-section) a:hover{color:#81313a}
+[data-theme=neutral-classic] .nav-join{border-color:rgba(188,188,178,.5)}
+[data-theme=neutral-classic] :is(a,button,input,select,textarea):focus-visible{outline-color:#c2767d}
+[data-theme=neutral-classic] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea):focus{border-color:#c2767d;box-shadow:0 0 0 2px rgba(188,72,81,.15)}

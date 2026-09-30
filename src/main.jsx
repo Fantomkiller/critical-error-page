@@ -25,7 +25,7 @@ function External({ href, children, ...props }) {
   return <a href={href} target="_blank" rel="noopener noreferrer" {...props}>{children}</a>;
 }
 
-const brandTheme = (theme) => theme === 'neutral-flashy' ? 'neutral' : theme;
+const brandTheme = (theme) => theme.startsWith('neutral') ? 'neutral' : theme;
 
 function Brand({ theme }) {
   return <a className="brand" href="#top" aria-label="Critical Error, strona główna">
@@ -39,7 +39,7 @@ function Header({ theme, onThemeChange }) {
   const close = () => setOpen(false);
   return <header className="site-header" id="top"><div className="nav-shell wrap">
     <Brand theme={theme} />
-    <label className="theme-picker"><span className="sr-only">Wygląd strony</span><select value={theme} onChange={(event) => onThemeChange(event.target.value)}><option value="dornogal">Dornogal</option><option value="dalaran">Dalaran</option><option value="citadel">Cytadela</option><option value="neutral">Neutralny</option><option value="neutral-flashy">Neutralny Flash</option><option value="blue">Niebieski</option><option value="green">Zielony</option></select></label>
+    <label className="theme-picker"><span className="sr-only">Wygląd strony</span><select value={theme} onChange={(event) => onThemeChange(event.target.value)}><option value="dornogal">Dornogal</option><option value="dalaran">Dalaran</option><option value="citadel">Cytadela</option><option value="neutral">Neutralny</option><option value="neutral-flashy">Neutralny Flash</option><option value="neutral-classic">Neutralny Classic</option><option value="blue">Niebieski</option><option value="green">Zielony</option></select></label>
     <button className="menu-toggle" type="button" aria-label={open ? 'Zamknij menu' : 'Otwórz menu'} aria-controls="site-nav" aria-expanded={open} onClick={() => setOpen(!open)}><span /><span /><span /></button>
     <nav id="site-nav" className={`site-nav ${open ? 'open' : ''}`} aria-label="Nawigacja główna" onClick={close}>
       <a href="#o-nas">Gildia</a><a href="#roster">Załoga</a><a href="#rekrutacja">Rekrutacja</a><a href="#mythic">Mythic+</a><a href="#raid">Raid</a><a className="nav-join" href="#kontakt">Kontakt <span aria-hidden="true">↗</span></a>
@@ -49,7 +49,7 @@ function Header({ theme, onThemeChange }) {
 
 function Hero({ theme }) {
   return <section className="hero" aria-labelledby="hero-title">
-    <div className="hero-art" role="img" aria-label={['dornogal', 'neutral', 'neutral-flashy', 'blue', 'green'].includes(theme) ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
+    <div className="hero-art" role="img" aria-label={['dornogal', 'neutral', 'neutral-flashy', 'neutral-classic', 'blue', 'green'].includes(theme) ? 'Dornogal na powierzchni, kamienne miasto Earthen wśród zielonych wzgórz' : theme === 'dalaran' ? 'Panorama magicznego miasta Dalaran, wieże i mosty nad chmurami' : 'Mroczna cytadela pod burgundowym burzowym niebem'} /><div className="hero-shade" />
     <div className="hero-content wrap">
       <p className="eyebrow"><span className="eyebrow-line" /> WORLD OF WARCRAFT <span className="eyebrow-separator">/</span> EU BURNING LEGION</p>
       <h1 id="hero-title" className="hero-logo"><span className="sr-only">Critical Error</span><img src={`${import.meta.env.BASE_URL}assets/brand/critical-error-${brandTheme(theme)}.png`} alt="" width="1774" height="887" /></h1>
@@ -133,7 +133,7 @@ function Progress() {
 }
 
 function App() {
-  const [theme, setTheme] = useState(() => { try { const saved = localStorage.getItem('critical-error-theme'); return ['dornogal', 'dalaran', 'citadel', 'neutral', 'neutral-flashy', 'blue', 'green'].includes(saved) ? saved : 'dornogal'; } catch { return 'dornogal'; } });
+  const [theme, setTheme] = useState(() => { try { const saved = localStorage.getItem('critical-error-theme'); return ['dornogal', 'dalaran', 'citadel', 'neutral', 'neutral-flashy', 'neutral-classic', 'blue', 'green'].includes(saved) ? saved : 'dornogal'; } catch { return 'dornogal'; } });
   useEffect(() => { document.documentElement.dataset.theme = theme; const favicon = document.querySelector('link[rel=icon]'); if (favicon) favicon.href = `${import.meta.env.BASE_URL}assets/brand/emblem-${brandTheme(theme)}.png`; try { localStorage.setItem('critical-error-theme', theme); } catch {} }, [theme]);
   const [config, setConfig] = useState({ ready: false });
   const { players, loading: rosterLoading } = useRoster(config);
