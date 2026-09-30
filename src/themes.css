@@ -193,49 +193,49 @@
 [data-theme^=neutral] .hero-logo img{height:100px;object-fit:cover}
 @media(max-width:580px){[data-theme^=neutral] .hero-logo img{height:70px}}
 
-/* Scarlet sampled from the logo; lighter shades keep text readable. */
-:root[data-theme^=neutral]{--red:#9d0000;--wine:#650c0c;--gold:#e26868;--line:rgba(205,132,132,.22);--accent-light:#ef7070}
-[data-theme^=neutral] :is(.brand-name>span,.title-stop,.brand-slash,.number-accent){color:var(--accent-light)}
-[data-theme^=neutral] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#ea8585}
-[data-theme^=neutral] .button-primary{background:linear-gradient(125deg,#b61b1b,#9d0000 58%,#710909);border-color:#c73d3d;color:#fff4ef;box-shadow:inset 0 1px rgba(255,195,195,.18),0 5px 18px rgba(157,0,0,.12)}
+/* Logo scarlet and darker reds, without pastel highlights. */
+:root[data-theme^=neutral]{--red:#9d0000;--wine:#650c0c;--gold:#b51212;--line:rgba(157,0,0,.3);--accent-red:#b51212}
+[data-theme^=neutral] :is(.brand-name>span,.title-stop,.brand-slash,.number-accent){color:var(--accent-red)}
+[data-theme^=neutral] :is(h2 em,.application-intro h2 em,.mythic-layout h2 em,.contact-grid h2 em,.mplus-leaderboard-head h3 em){color:#b51212}
+[data-theme^=neutral] .button-primary{background:linear-gradient(125deg,#b51212,#9d0000 58%,#710909);border-color:#790000;color:#fff4ef;box-shadow:inset 0 1px rgba(157,0,0,.18),0 5px 18px rgba(157,0,0,.12)}
 [data-theme^=neutral] .button{transition:background .2s,transform .2s,border-color .2s,box-shadow .2s}
-[data-theme^=neutral] .button-primary:hover{background:linear-gradient(125deg,#d43030,#b51010 58%,#8c0808);border-color:#e26868;box-shadow:inset 0 1px rgba(255,210,210,.3),0 5px 24px rgba(157,0,0,.25)}
-[data-theme^=neutral] :is(.button-ghost,.nav-join):hover{background:linear-gradient(125deg,rgba(157,0,0,.18),rgba(157,0,0,.06));border-color:#c64c4c;box-shadow:inset 0 1px rgba(239,112,112,.12)}
-[data-theme^=neutral] :is(.site-nav a,.contact-links>a,.text-link):hover{color:var(--accent-light)}
+[data-theme^=neutral] .button-primary:hover{background:linear-gradient(125deg,#8c0000,#790000 58%,#650000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.3),0 5px 24px rgba(157,0,0,.25)}
+[data-theme^=neutral] :is(.button-ghost,.nav-join):hover{background:linear-gradient(125deg,rgba(157,0,0,.18),rgba(157,0,0,.06));border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.12)}
+[data-theme^=neutral] :is(.site-nav a,.contact-links>a,.text-link):hover{color:var(--accent-red)}
 [data-theme^=neutral] :is(.intro h2 em,.progress-heading h2 em,.dark-eyebrow,.intro .text-link,.raid-discord,.dashboard-label,.raid-schedule strong,.raid-schedule h3 span,.progress-modes strong,.live-progress .text-link){color:#9d1717}
 [data-theme^=neutral] :is(.intro,.progress-section) a:hover{color:#710909}
-[data-theme^=neutral] .filter.active::after{background:linear-gradient(90deg,#9d0000,#ed5e5e)}
-[data-theme^=neutral] .role-card.selected{background:linear-gradient(125deg,#512a2a,#3e2828);border-color:#c84f4f;box-shadow:inset 0 1px rgba(239,112,112,.15)}
-[data-theme^=neutral] .role-card:hover{border-color:#bc4242}
+[data-theme^=neutral] .filter.active::after{background:linear-gradient(90deg,#9d0000,#b51212)}
+[data-theme^=neutral] .role-card.selected{background:linear-gradient(125deg,#512a2a,#3e2828);border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.15)}
+[data-theme^=neutral] .role-card:hover{border-color:#790000}
 [data-theme^=neutral] .availability input{accent-color:#9d0000}
-[data-theme^=neutral] :is(a,button,input,select,textarea):focus-visible{outline-color:var(--accent-light)}
-[data-theme^=neutral] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea):focus{border-color:#d45555;box-shadow:0 0 0 2px rgba(157,0,0,.16)}
+[data-theme^=neutral] :is(a,button,input,select,textarea):focus-visible{outline-color:var(--accent-red)}
+[data-theme^=neutral] :is(.application-form input:not([type=checkbox]),.application-form select,.application-form textarea):focus{border-color:#790000;box-shadow:0 0 0 2px rgba(157,0,0,.16)}
 [data-theme^=neutral] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(157,0,0,.11),transparent 45%),#1d2528}
 [data-theme^=neutral] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(157,0,0,.1),transparent 45%),#242c2f}
 [data-theme^=neutral] .mplus-leader:hover td{background:rgba(157,0,0,.12)}
 [data-theme^=neutral] .contact-section{background:linear-gradient(125deg,rgba(157,0,0,.09),transparent 55%),#41494c}
 
 /* Stronger neutral option: effects belong to the page, never the logo. */
-:root[data-theme=neutral-flashy]{--red:#c31717;--wine:#7a0808;--gold:#f26565;--accent-light:#ff7575;--line:rgba(221,61,61,.3)}
+:root[data-theme=neutral-flashy]{--red:#b51212;--wine:#7a0808;--gold:#b51212;--accent-red:#b51212;--line:rgba(221,61,61,.3)}
 [data-theme=neutral-flashy] .hero-shade{background:radial-gradient(ellipse at 15% 75%,rgba(157,0,0,.23),transparent 48%),linear-gradient(90deg,rgba(20,24,26,.93),rgba(29,35,37,.65) 28%,rgba(36,43,45,.15) 65%),linear-gradient(0deg,#191d20,rgba(23,22,34,.3) 18%,transparent 48%)}
 [data-theme=neutral-flashy] .site-header{border-bottom-color:rgba(211,34,34,.5);box-shadow:0 3px 22px rgba(157,0,0,.1)}
 [data-theme=neutral-flashy] :is(.button,.nav-join){position:relative;isolation:isolate;overflow:hidden}
-[data-theme=neutral-flashy] .button-primary{background:linear-gradient(115deg,#d72525,#ad0b0b 48%,#780000);border-color:#f25454;box-shadow:inset 0 1px rgba(255,184,184,.35),0 6px 25px rgba(157,0,0,.32)}
-[data-theme=neutral-flashy] .button-primary:hover{background:linear-gradient(115deg,#ec3737,#cd1313 48%,#930000);border-color:#ff8585;box-shadow:inset 0 1px rgba(255,231,206,.6),0 8px 32px rgba(190,10,10,.48)}
-[data-theme=neutral-flashy] :is(.button,.nav-join)::before{content:'';position:absolute;inset:-60% auto -60% -60%;width:30%;background:linear-gradient(90deg,transparent,rgba(255,160,160,.3),transparent);transform:skewX(-22deg);transition:left .55s ease;pointer-events:none;z-index:-1}
+[data-theme=neutral-flashy] .button-primary{background:linear-gradient(115deg,#b51212,#ad0b0b 48%,#780000);border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.35),0 6px 25px rgba(157,0,0,.32)}
+[data-theme=neutral-flashy] .button-primary:hover{background:linear-gradient(115deg,#9d0000,#800000 48%,#650000);border-color:#650000;box-shadow:inset 0 1px rgba(157,0,0,.6),0 8px 32px rgba(190,10,10,.48)}
+[data-theme=neutral-flashy] :is(.button,.nav-join)::before{content:'';position:absolute;inset:-60% auto -60% -60%;width:30%;background:linear-gradient(90deg,transparent,rgba(157,0,0,.3),transparent);transform:skewX(-22deg);transition:left .55s ease;pointer-events:none;z-index:-1}
 [data-theme=neutral-flashy] :is(.button,.nav-join):hover::before{left:140%}
-[data-theme=neutral-flashy] :is(.button-ghost,.nav-join):hover{background:linear-gradient(120deg,rgba(196,14,14,.34),rgba(157,0,0,.12));box-shadow:inset 0 1px rgba(255,137,137,.25),0 4px 22px rgba(157,0,0,.24);border-color:#e94e4e}
-[data-theme=neutral-flashy] :is(h2 em,.mplus-leaderboard-head h3 em){color:#fa6e6e}
-[data-theme=neutral-flashy] :is(.intro h2 em,.progress-heading h2 em){color:#b51919}
+[data-theme=neutral-flashy] :is(.button-ghost,.nav-join):hover{background:linear-gradient(120deg,rgba(196,14,14,.34),rgba(157,0,0,.12));box-shadow:inset 0 1px rgba(157,0,0,.25),0 4px 22px rgba(157,0,0,.24);border-color:#790000}
+[data-theme=neutral-flashy] :is(h2 em,.mplus-leaderboard-head h3 em){color:#b51212}
+[data-theme=neutral-flashy] :is(.intro h2 em,.progress-heading h2 em){color:#b51212}
 [data-theme=neutral-flashy] .roster-section{background:radial-gradient(ellipse at 95% 0%,rgba(185,13,13,.23),transparent 50%),#1d2528}
 [data-theme=neutral-flashy] .mythic-section{background:radial-gradient(ellipse at 85% 10%,rgba(185,13,13,.22),transparent 48%),#242c2f}
 [data-theme=neutral-flashy] :is(.player-card,.mythic-card,.role-card){transition:background .2s,border-color .2s,box-shadow .2s}
-[data-theme=neutral-flashy] :is(.player-card,.mythic-card,.role-card):hover{background:linear-gradient(120deg,rgba(151,20,20,.26),rgba(48,59,64,.98));border-color:#b13838;box-shadow:inset 0 1px rgba(255,110,110,.17),0 3px 18px rgba(157,0,0,.13)}
-[data-theme=neutral-flashy] .role-card.selected{background:linear-gradient(120deg,#701f1f,#422827);border-color:#eb5757;box-shadow:inset 0 1px rgba(255,144,144,.25),0 0 18px rgba(157,0,0,.18)}
-[data-theme=neutral-flashy] .filter.active::after{background:linear-gradient(90deg,#ba0909,#ff6666);box-shadow:0 1px 8px rgba(215,20,20,.4)}
+[data-theme=neutral-flashy] :is(.player-card,.mythic-card,.role-card):hover{background:linear-gradient(120deg,rgba(151,20,20,.26),rgba(48,59,64,.98));border-color:#b13838;box-shadow:inset 0 1px rgba(157,0,0,.17),0 3px 18px rgba(157,0,0,.13)}
+[data-theme=neutral-flashy] .role-card.selected{background:linear-gradient(120deg,#701f1f,#422827);border-color:#790000;box-shadow:inset 0 1px rgba(157,0,0,.25),0 0 18px rgba(157,0,0,.18)}
+[data-theme=neutral-flashy] .filter.active::after{background:linear-gradient(90deg,#b51212,#b51212);box-shadow:0 1px 8px rgba(215,20,20,.4)}
 [data-theme=neutral-flashy] .contact-section{background:radial-gradient(ellipse at 0% 100%,rgba(157,0,0,.25),transparent 60%),#41494c;border-top-color:#aa2727}
 [data-theme=neutral-flashy] ::selection{background:#9d0000;color:#fff4ef}
 @media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before{display:none}[data-theme=neutral-flashy] :is(.button,.player-card,.mythic-card,.role-card){transition:none}}
 
-[data-theme^=neutral] .nav-join{color:var(--cream);border-color:rgba(197,78,78,.5)}
+[data-theme^=neutral] .nav-join{color:var(--cream);border-color:rgba(157,0,0,.65)}
 [data-theme^=neutral] ::selection{background:#9d0000;color:#fff4ef}
