@@ -5,10 +5,10 @@
 .nav-shell{gap:20px}.site-nav{margin-left:auto}
 .theme-picker select{background:var(--panel);border:0;color:var(--cream);padding:6px 8px;font:600 11px var(--sans);max-width:110px;cursor:pointer;color-scheme:dark}
 .brand-emblem{width:52px;height:52px;object-fit:contain;flex:none}
-.hero h1.hero-logo{width:min(650px,55vw);margin:22px 0 24px;line-height:0;text-shadow:none}
+.hero h1.hero-logo{width:min(480px,45vw);margin:22px 0 24px;line-height:0;text-shadow:none}
 .hero-logo img{display:block;width:100%;height:auto;filter:none}
-@media(max-width:800px){.hero h1.hero-logo{width:min(560px,85vw)}.brand-emblem{width:42px;height:42px}}
-@media(max-width:580px){.hero h1.hero-logo{width:100%;max-width:390px;margin:24px 0}.brand-emblem{width:36px;height:36px}.hero-lead{max-width:350px}}
+@media(max-width:800px){.hero h1.hero-logo{width:min(440px,75vw)}.brand-emblem{width:42px;height:42px}}
+@media(max-width:580px){.hero h1.hero-logo{width:100%;max-width:300px;margin:24px 0}.brand-emblem{width:36px;height:36px}.hero-lead{max-width:350px}}
 
 :root:is([data-theme=dornogal],[data-theme=dalaran]){--bg:#10191e;--panel:#18262d;--panel2:#25343c;--wine:#66513a;--red:#bf9860;--cream:#eae4d6;--muted:#a5b3b6;--gold:#b99d70;--line:rgba(183,163,125,.22)}
 :is([data-theme=dornogal],[data-theme=dalaran]) ::selection{background:#675842;color:#fff}
