@@ -89,3 +89,7 @@
 [data-theme=dalaran] .contact-section{background:#343048}
 [data-theme=dalaran] .stat-skeleton{background-image:linear-gradient(100deg,#49405e 20%,#7e7295 48%,#49405e 76%)}
 [data-theme=dalaran] .menu-toggle,[data-theme=dalaran] .site-nav.open{background:#282639}
+
+/* Ostatnia fraza nagłówka pozostaje razem. */
+#about-title .about-ending{white-space:nowrap}
+@media(max-width:580px){#about-title{font-size:clamp(2rem,9vw,2.9rem)}}
