@@ -16,3 +16,7 @@ Use attached original Critical Error logo as strict edit reference. Create ONE c
 ## Korekta: pojedyncze podkreślenie
 
 Wbudowany imagegen. Dla obu plików: Delete only the lower red underline stroke. Keep exactly one upper underline. Preserve typography, colors, slash, layout and transparent background.
+
+## Korekta: bez poświaty
+
+Wbudowany imagegen, edycja obu plików. Prompt: Surgical correction only. Preserve ivory glyphs, typography, layout and outlines. Single flat dark scarlet #9d0000 tapered underline and diagonal slash, clearly defined edges, no feathering, no blur, no glow, bloom, haze or cast shadows. Fully transparent background outside glyph and stroke silhouettes.
