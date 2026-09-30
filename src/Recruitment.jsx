@@ -85,7 +85,7 @@ export default function Recruitment({ endpoint }) {
 
   return <section className="application-section section-pad" id="rekrutacja" aria-labelledby="application-title"><div className="wrap">
     <div className="section-topline"><span>03 / REKRUTACJA</span><span>GRAJMY RAZEM</span></div>
-    <div className="application-intro reveal"><p className="eyebrow"><span className="eyebrow-line" /> REKRUTACJA</p><h2 id="application-title">ZAGRAJ<br /><em>Z NAMI.</em></h2><p>Szukasz stałego składu na Mythic? Napisz, czym grasz, czego oczekujesz od gildii i kiedy możesz raidować. Zostaw kontakt na Discordzie, żebyśmy mogli porozmawiać.</p></div>
+    <div className="application-intro reveal"><p className="eyebrow"><span className="eyebrow-line" /> REKRUTACJA</p><h2 id="application-title">ZAGRAJ<br /><em>Z NAMI.</em></h2><p>Szukasz stałego składu na Mythic? Napisz, czym grasz, czego oczekujesz od gildii i kiedy możesz raidować. Podaj swoją nazwę użytkownika Discord, żebyśmy mogli porozmawiać.</p></div>
     <div className="application-layout">
       <form className="application-form" onSubmit={submit}>
         <div className="form-step"><span>01</span><h3>Czym grasz?</h3></div>
@@ -99,7 +99,7 @@ export default function Recruitment({ endpoint }) {
         <div className="form-grid">
           <label>Nick postaci *<input required maxLength={32} autoComplete="off" value={form.character} onChange={(e) => update('character', e.target.value)} placeholder="Np. Twojapostac" /></label>
           <label>Realm *<input required maxLength={50} value={form.realm} onChange={(e) => update('realm', e.target.value)} placeholder="Np. Burning Legion" /></label>
-          <label>Doświadczenie<select value={form.experience} onChange={(e) => update('experience', e.target.value)}><option value="">Wybierz</option><option>Raider Heroic</option><option>Raider Mythic</option><option>Cutting Edge</option><option>Wracam po przerwie</option></select></label>
+          <label>Doświadczenie<select value={form.experience} onChange={(e) => update('experience', e.target.value)}><option value="">Wybierz</option><option>Raidy Heroic</option><option>Raidy Mythic</option><option>Cutting Edge</option></select></label>
         </div>
         <div className="profile-links"><label>Warcraft Logs <span className="field-optional">opcjonalnie</span><input type="url" maxLength={300} value={form.logs} onChange={(e) => update('logs', e.target.value)} placeholder="https://www.warcraftlogs.com/character/..." /><small>Wklej profil postaci lub raport z HC/Mythic. <a href="https://www.warcraftlogs.com/" target="_blank" rel="noopener noreferrer">Otwórz Warcraft Logs ↗</a></small></label><label>Raider.IO <span className="field-optional">opcjonalnie</span><input type="url" maxLength={300} value={form.raiderio} onChange={(e) => update('raiderio', e.target.value)} placeholder="https://raider.io/characters/eu/..." /><small>Wklej profil postaci z wynikiem M+ i progresem. <a href="https://raider.io/" target="_blank" rel="noopener noreferrer">Otwórz Raider.IO ↗</a></small></label></div>
         <div className="form-step"><span>03</span><h3>Wspólne raidy</h3></div>
@@ -109,24 +109,24 @@ export default function Recruitment({ endpoint }) {
         <div className="form-step"><span>04</span><h3>Pozostańmy w kontakcie</h3></div>
         <div className="form-grid">
           <label>Pełna nazwa użytkownika Discord *<input required minLength={2} maxLength={32} autoComplete="off" autoCapitalize="none" spellCheck={false} value={form.discord} onChange={(e) => update('discord', e.target.value)} placeholder="np. gracz.123" /><small>Przepisz nazwę użytkownika z profilu, np. gracz.123. Bez @. Nie wpisuj nazwy wyświetlanej ani nicku z serwera.</small></label>
-          <label>Godziny krótkiej rozmowy *<input required maxLength={120} value={form.contactTime} onChange={(e) => update('contactTime', e.target.value)} placeholder="Np. w tygodniu po 18:00" /><small>Kiedy możemy odezwać się na Discordzie?</small></label>
+          <label>Kiedy możesz porozmawiać? *<input required maxLength={120} value={form.contactTime} onChange={(e) => update('contactTime', e.target.value)} placeholder="Np. w tygodniu po 18:00" /><small>Kiedy możemy odezwać się na Discordzie?</small></label>
         </div>
         <p className="contact-hint"><a href={DISCORD} target="_blank" rel="noopener noreferrer">Dołącz do naszego Discorda ↗</a> i pozwól członkom serwera pisać do Ciebie. Wtedy szybciej się odezwiemy.</p>
-        <label className="form-full">Co jeszcze powinniśmy o Tobie wiedzieć?<textarea rows={4} maxLength={1500} value={form.note} onChange={(e) => update('note', e.target.value)} placeholder="Poprzednie gildie i progres, inne postacie, podejście do feedbacku. Jest coś, o co chcesz nas zapytać?" /><small className="counter">{form.note.length} / 1500</small></label>
+        <label className="form-full">Co jeszcze powinniśmy o Tobie wiedzieć?<textarea rows={4} maxLength={1500} value={form.note} onChange={(e) => update('note', e.target.value)} placeholder="Poprzednie gildie i progres, inne postacie, podejście do uwag. Jeśli wracasz po przerwie, napisz o tym tutaj. Jest coś, o co chcesz nas zapytać?" /><small className="counter">{form.note.length} / 1500</small></label>
         {error && <p className="form-error" role="alert">{error}</p>}
-        <div className="form-submit"><button className="button button-primary" type="submit" disabled={busy}>{busy ? 'Wysyłanie…' : endpoint ? 'Wyślij zgłoszenie ↗' : 'Przygotuj zgłoszenie ↗'}</button><p>{endpoint ? 'Odpowiemy na podanym Discordzie. Twoje odpowiedzi nie pojawią się na stronie.' : 'Skopiuj przygotowane zgłoszenie i przekaż je nam na Discordzie.'}</p></div>
-        {status === 'sent' && <div className="form-result" role="status"><h4>Zgłoszenie wysłane</h4><p>Dołącz teraz do naszego Discorda i napisz krótkie „cześć”, żebyśmy mogli się z Tobą skontaktować. Godziny rozmowy mamy już w zgłoszeniu.</p><a className="button button-primary" href={DISCORD} target="_blank" rel="noopener noreferrer">Dołącz do Discorda ↗</a></div>}
-        {(status === 'copied' || status === 'manual') && <div className="form-result" role="status"><h4>{status === 'copied' ? 'Zgłoszenie skopiowane' : 'Skopiuj swoje zgłoszenie'}</h4><p>Wklej tę wiadomość na naszym Discordzie, żebyśmy ją dostali. Samo wypełnienie formularza nie wysyła danych.</p><textarea readOnly value={draft} rows={10} aria-label="Treść zgłoszenia do skopiowania" /><div className="form-result-actions"><button type="button" className="button button-ghost" onClick={copyAgain}>Kopiuj ponownie</button><a className="button button-primary" href={DISCORD} target="_blank" rel="noopener noreferrer">Przejdź na Discord ↗</a></div></div>}
+        <div className="form-submit"><button className="button button-primary" type="submit" disabled={busy}>{busy ? 'Wysyłanie…' : endpoint ? 'Wyślij zgłoszenie ↗' : 'Przygotuj zgłoszenie ↗'}</button><p>{endpoint ? 'Skontaktujemy się z Tobą na Discordzie. Twoje odpowiedzi nie pojawią się na stronie.' : 'Skopiuj przygotowane zgłoszenie i przekaż je nam na Discordzie.'}</p></div>
+        {status === 'sent' && <div className="form-result" role="status"><h4>Zgłoszenie wysłane</h4><p>Dołącz teraz do naszego Discorda i napisz krótkie „cześć”, żebyśmy mogli się z Tobą skontaktować. Godziny rozmowy mamy już w zgłoszeniu.</p><a className="button button-primary" href={DISCORD} target="_blank" rel="noopener noreferrer">Dołącz do naszego Discorda ↗</a></div>}
+        {(status === 'copied' || status === 'manual') && <div className="form-result" role="status"><h4>{status === 'copied' ? 'Zgłoszenie skopiowane' : 'Skopiuj swoje zgłoszenie'}</h4><p>Wklej tę wiadomość na naszym Discordzie, żebyśmy ją dostali. Samo wypełnienie formularza nie wysyła danych.</p><textarea readOnly value={draft} rows={10} aria-label="Treść zgłoszenia do skopiowania" /><div className="form-result-actions"><button type="button" className="button button-ghost" onClick={copyAgain}>Kopiuj ponownie</button><a className="button button-primary" href={DISCORD} target="_blank" rel="noopener noreferrer">Dołącz do naszego Discorda ↗</a></div></div>}
       </form>
       <aside className="application-aside" aria-label="Jak wygląda dołączenie do składu">
         <span className="dashboard-label">MIEJSCE W SKŁADZIE</span>
         <strong>Wypracowuje się je grą.</strong>
         <div className="aside-rule" />
         <h3>Czego szukamy?</h3>
-        <ul><li>Znajomości klasy i przygotowania do bossów.</li><li>Doświadczenia z HC lub Mythic.</li><li>Regularnej obecności i dobrego kontaktu.</li><li>Otwartości na feedback i walki o miejsce w składzie.</li></ul>
+        <ul><li>Znajomości swojej klasy i przygotowania do walk.</li><li>Doświadczenia w raidach HC lub Mythic.</li><li>Regularnej obecności i dobrego kontaktu.</li><li>Otwartości na uwagi i gotowości do rywalizacji o miejsce w składzie.</li></ul>
         <div className="aside-rule" />
         <h3>Co dalej?</h3>
-        <p>Przeczytamy zgłoszenie i odezwiemy się na Discordzie w godzinach, które podasz. Porozmawiamy o Twoim doświadczeniu i o tym, jak chcesz grać.</p>
+        <p>Przeczytamy zgłoszenie i skontaktujemy się na Discordzie, żeby ustalić termin krótkiej rozmowy. Porozmawiamy o Twoim doświadczeniu i o tym, jak chcesz grać.</p>
         <a className="text-link" href={DISCORD} target="_blank" rel="noopener noreferrer">Masz pytania? Napisz do nas ↗</a>
       </aside>
     </div>
