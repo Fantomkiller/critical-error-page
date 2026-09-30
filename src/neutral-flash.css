@@ -1,11 +1,25 @@
 /* Neutral Flash: ivory text, charcoal surfaces, logo scarlet accents. */
 :root[data-theme=neutral-flashy]{--red:#9d0000;--wine:#780000;--gold:#adb9c2;--muted:#c0c7ca;--heading-accent:#d93a3a;--silver:#adb9c2;--line:rgba(192,199,202,.28);--ui-motion:200ms ease}
 
+/* Use the existing graphic wordmark in the header and footer. */
+[data-theme=neutral-flashy] .brand-graphic{flex:none}
+[data-theme=neutral-flashy] .brand-wordmark{display:block;width:240px;height:44px;object-fit:contain}
+[data-theme=neutral-flashy] .footer-top .brand-wordmark{width:320px;height:60px}
+@media(max-width:1100px){[data-theme=neutral-flashy] .nav-shell .brand-wordmark{width:190px;height:38px}}
+@media(max-width:580px){[data-theme=neutral-flashy] .nav-shell .brand-wordmark{width:140px;height:30px}[data-theme=neutral-flashy] .footer-top .brand-wordmark{width:min(300px,80vw);height:55px}}
+
 /* Interaction feedback changes light and edges, never position. */
 [data-theme=neutral-flashy] :is(a,button,input,select,textarea,.player-card,.mythic-card,.search-box,.availability label){transition:color var(--ui-motion),background-color var(--ui-motion),border-color var(--ui-motion),box-shadow var(--ui-motion),opacity var(--ui-motion)}
 [data-theme=neutral-flashy] :is(.button,.role-card,.mythic-card,.player-card):hover{transform:none}
 [data-theme=neutral-flashy] .text-link,[data-theme=neutral-flashy] .text-link:hover{gap:20px}
 [data-theme=neutral-flashy] .player-card:hover .player-arrow{transform:none}
+
+/* Menu links gain a red underline without shifting the navigation. */
+:root[data-theme=neutral-flashy] .site-nav a:not(.nav-join){position:relative;color:#c0c7ca;transition:color var(--ui-motion)}
+:root[data-theme=neutral-flashy] .site-nav a:not(.nav-join)::after{content:'';position:absolute;left:0;right:0;bottom:-8px;height:2px;background:#9d0000;transform:scaleX(0);transform-origin:left;transition:transform var(--ui-motion);pointer-events:none}
+:root[data-theme=neutral-flashy] .site-nav a:not(.nav-join):is(:hover,:focus-visible){color:#fff}
+:root[data-theme=neutral-flashy] .site-nav a:not(.nav-join):is(:hover,:focus-visible)::after{transform:scaleX(1)}
+@media(max-width:800px){:root[data-theme=neutral-flashy] .site-nav a:not(.nav-join)::after{left:10px;right:10px;bottom:7px}}
 
 /* The sheen crosses the surface above its background. */
 :root[data-theme=neutral-flashy] :is(.button,.nav-join){position:relative;isolation:isolate;overflow:hidden}
@@ -14,7 +28,7 @@
 :root[data-theme=neutral-flashy] :is(.button,.nav-join)::before{content:'';position:absolute;top:-60%;bottom:-60%;left:-55%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-22deg);transition:left 600ms ease;pointer-events:none;z-index:0}
 :root[data-theme=neutral-flashy] :is(.button,.nav-join):is(:hover,:focus-visible)::before{left:130%}
 :root[data-theme=neutral-flashy] :is(.button-ghost,.nav-join):is(:hover,:focus-visible){color:#fff;background-color:rgba(157,0,0,.17);border-color:#9d0000;box-shadow:inset 0 1px rgba(255,255,255,.08)}
-:root[data-theme=neutral-flashy] .button-ghost:is(:hover,:focus-visible){background:linear-gradient(115deg,#9d0000,#800000);color:#fff;border-color:#790000;box-shadow:inset 0 1px rgba(255,255,255,.1),0 4px 18px rgba(157,0,0,.22)}
+:root[data-theme=neutral-flashy] .button-ghost:is(:hover,:focus-visible){background:#263034;color:#fff;border-color:#9d0000;box-shadow:inset 0 1px rgba(255,255,255,.08)}
 
 /* Scarlet headings and cool silver labels restore hierarchy on dark panels. */
 :root[data-theme=neutral-flashy] :is(.eyebrow,.section-topline,.roster-group-heading h3,.application-aside .dashboard-label,.contact-links .dashboard-label,.application-aside>strong,.mythic-card>span){color:var(--silver)}
@@ -37,9 +51,15 @@
 :root[data-theme=neutral-flashy] :is(.intro .text-link,.live-progress .text-link):hover{color:#650000}
 
 /* Cards keep the same surface while hover adds a restrained edge. */
-:root[data-theme=neutral-flashy] .player-card:hover{border-color:#9d0000;box-shadow:inset 0 0 0 1px rgba(157,0,0,.5),inset 0 0 28px rgba(157,0,0,.15)}
-:root[data-theme=neutral-flashy] .player-card::after{inset:-50% auto -50% -45%;width:34%;background:linear-gradient(90deg,transparent,rgba(157,0,0,.35) 35%,rgba(255,255,255,.22) 50%,rgba(157,0,0,.35) 65%,transparent);transform:skewX(-22deg);opacity:0;transition:left 600ms ease,opacity var(--ui-motion);pointer-events:none}
-:root[data-theme=neutral-flashy] .player-card:hover::after{left:125%;opacity:1}
+:root[data-theme=neutral-flashy] .player-card:hover{border-color:#9d0000;box-shadow:inset 0 0 0 1px rgba(157,0,0,.5)}
+:root[data-theme=neutral-flashy] .mplus-leader{position:relative}
+:root[data-theme=neutral-flashy] .mplus-leader td{transition:background-color var(--ui-motion),box-shadow var(--ui-motion)}
+:root[data-theme=neutral-flashy] .mplus-leader:hover td{background:rgba(255,255,255,.045);box-shadow:inset 0 1px #9d0000,inset 0 -1px #9d0000}
+:root[data-theme=neutral-flashy] .mplus-leader:hover td:first-child{box-shadow:inset 1px 0 #9d0000,inset 0 1px #9d0000,inset 0 -1px #9d0000}
+:root[data-theme=neutral-flashy] .mplus-leader:hover td:last-child{box-shadow:inset -1px 0 #9d0000,inset 0 1px #9d0000,inset 0 -1px #9d0000}
+:root[data-theme=neutral-flashy] .mplus-identity:hover strong{color:inherit}
+:root[data-theme=neutral-flashy] :is(.player-card,.mplus-leader)::after{content:'';position:absolute;inset:0;width:auto;background:linear-gradient(110deg,transparent,rgba(255,255,255,.25),transparent) no-repeat -60% 0 / 34% 100%;transform:none;opacity:0;transition:background-position 600ms ease,opacity var(--ui-motion);pointer-events:none}
+:root[data-theme=neutral-flashy] :is(.player-card,.mplus-leader):hover::after{background-position:160% 0;opacity:1}
 :root[data-theme=neutral-flashy] :is(.role-card,.mythic-card){position:relative;isolation:isolate}
 :root[data-theme=neutral-flashy] .role-card,:root[data-theme=neutral-flashy] .role-card:hover{background:#3e474b}
 :root[data-theme=neutral-flashy] .mythic-card,:root[data-theme=neutral-flashy] .mythic-card:hover{background:linear-gradient(145deg,#41494c,#303b40)}
@@ -59,4 +79,4 @@
 
 @media(max-width:580px){[data-theme=neutral-flashy] .contact-grid h2{font-size:clamp(1.8rem,8vw,2.6rem)}[data-theme=neutral-flashy] .mplus-table{min-width:0}[data-theme=neutral-flashy] .mplus-table :is(th,td){padding:10px 6px}[data-theme=neutral-flashy] .mplus-rank{width:34px}[data-theme=neutral-flashy] .mplus-identity{gap:8px}[data-theme=neutral-flashy] .mplus-identity img{width:28px;height:28px}[data-theme=neutral-flashy] .mplus-identity span{max-width:135px}[data-theme=neutral-flashy] .mplus-score strong{font-size:1rem}}
 
-@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before,[data-theme=neutral-flashy] .player-card::after{display:none}}
+@media(prefers-reduced-motion:reduce){[data-theme=neutral-flashy] :is(.button,.nav-join)::before,[data-theme=neutral-flashy] :is(.player-card,.mplus-leader)::after{display:none}}

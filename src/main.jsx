@@ -29,6 +29,9 @@ function External({ href, children, ...props }) {
 const brandTheme = (theme) => theme.startsWith('neutral') ? 'neutral' : theme;
 
 function Brand({ theme }) {
+  if (theme === 'neutral-flashy') return <a className="brand brand-graphic" href="#top" aria-label="Critical Error, strona główna">
+    <img className="brand-wordmark" src={`${import.meta.env.BASE_URL}assets/brand/critical-error-neutral.svg`} alt="" width="2172" height="724" />
+  </a>;
   return <a className="brand" href="#top" aria-label="Critical Error, strona główna">
     <img className="brand-emblem" src={`${import.meta.env.BASE_URL}assets/brand/emblem-${brandTheme(theme)}.png`} alt="" width="52" height="52" />
     <span className="brand-name">CRITICAL <span>ERROR</span><small>EU · BURNING LEGION</small></span>
